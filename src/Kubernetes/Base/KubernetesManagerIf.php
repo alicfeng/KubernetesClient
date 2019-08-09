@@ -17,7 +17,7 @@ interface KubernetesManagerIf
      *
      * @param array $package 期待的资源配置
      *
-     * @return mixed
+     * @return $this
      */
     public function create(array $package = []);
 
@@ -28,7 +28,7 @@ interface KubernetesManagerIf
      * @param string $name    资源名称
      * @param array  $package 期待的资源配置
      *
-     * @return mixed
+     * @return $this
      */
     public function apply(string $name, array $package = []);
 
@@ -38,7 +38,7 @@ interface KubernetesManagerIf
      *
      * @param string $name 资源名称
      *
-     * @return mixed
+     * @return $this
      */
     public function remove(string $name);
 
@@ -48,7 +48,7 @@ interface KubernetesManagerIf
      *
      * @param bool $is_all_namespace 是否为所有命名空间
      *
-     * @return mixed
+     * @return $this
      */
     public function list(bool $is_all_namespace = false);
 
@@ -58,7 +58,7 @@ interface KubernetesManagerIf
      *
      * @param string $name 资源项名称
      *
-     * @return mixed
+     * @return $this
      */
     public function queryStatus(string $name);
 }

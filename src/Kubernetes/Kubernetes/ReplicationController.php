@@ -12,13 +12,8 @@ namespace AlicFeng\Kubernetes\Kubernetes;
 use AlicFeng\Kubernetes\Base\KubernetesClient;
 use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
 
-class Service extends KubernetesClient implements KubernetesManagerIf
+class ReplicationController extends KubernetesClient implements KubernetesManagerIf
 {
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-    }
-
     /**
      * @function    新建资源项
      * @description 新建资源项
@@ -29,9 +24,8 @@ class Service extends KubernetesClient implements KubernetesManagerIf
      */
     public function create(array $package = [])
     {
-        $uri = "/api/v1/namespaces/{$this->namespace}/services";
-
-        return $this->_create($uri, self::TYPE_SERVICE, $package);
+        // TODO: Implement create() method.
+        return $this;
     }
 
     /**
@@ -45,9 +39,8 @@ class Service extends KubernetesClient implements KubernetesManagerIf
      */
     public function apply(string $name, array $package = [])
     {
-        $uri = "/api/v1/namespaces/{$this->namespace}/services/{$name}";
-
-        return $this->_apply($uri, self::TYPE_SERVICE, $package);
+        // TODO: Implement apply() method.
+        return $this;
     }
 
     /**
@@ -60,9 +53,8 @@ class Service extends KubernetesClient implements KubernetesManagerIf
      */
     public function remove(string $name)
     {
-        $uri = "/api/v1/namespaces/{$this->namespace}/services/{$name}";
-
-        return $this->_remove($uri);
+        // TODO: Implement remove() method.
+        return $this;
     }
 
     /**
@@ -75,12 +67,8 @@ class Service extends KubernetesClient implements KubernetesManagerIf
      */
     public function list(bool $is_all_namespace = false)
     {
-        $uri = "/api/v1/namespaces/{$this->namespace}/services";
-        if ($is_all_namespace) {
-            $uri = '/api/v1/services';
-        }
-
-        return $this->_list($uri);
+        // TODO: Implement list() method.
+        return $this;
     }
 
     /**
@@ -93,8 +81,7 @@ class Service extends KubernetesClient implements KubernetesManagerIf
      */
     public function queryStatus(string $name)
     {
-        $uri = "/api/v1/namespaces/{$this->namespace}/services/{$name}/status";
-
-        return $this->_queryStatus($uri);
+        // TODO: Implement queryStatus() method.
+        return $this;
     }
 }

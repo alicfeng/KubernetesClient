@@ -25,7 +25,7 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      *
      * @param array $package 期待的资源配置
      *
-     * @return mixed
+     * @return $this
      */
     public function create(array $package = [])
     {
@@ -41,7 +41,7 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      * @param string $name    资源名称
      * @param array  $package 期待的资源配置
      *
-     * @return mixed
+     * @return $this
      */
     public function apply(string $name, array $package = [])
     {
@@ -54,7 +54,7 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      *
      * @param string $name 资源名称
      *
-     * @return mixed
+     * @return $this
      */
     public function remove(string $name)
     {
@@ -67,7 +67,7 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      *
      * @param bool $is_all_namespace 是否为所有命名空间
      *
-     * @return mixed
+     * @return $this
      */
     public function list(bool $is_all_namespace = false)
     {
@@ -80,7 +80,7 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      *
      * @param string $name 资源项名称
      *
-     * @return mixed
+     * @return $this
      */
     public function queryStatus(string $name)
     {

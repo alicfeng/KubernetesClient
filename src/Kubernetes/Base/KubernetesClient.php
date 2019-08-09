@@ -217,7 +217,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     protected function _apply(string $uri, string $type, array $package)
     {
         $this->commonPackage($type, $package)->builder();
-
         $this->response = $this->put($uri, ['json' => $this->package]);
 
         return $this;
@@ -291,7 +290,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
-     * @function    是否存在
+     * @function    查询一个项
      * @description 支持所有服务
      *
      * @param string $name 名称
@@ -302,9 +301,15 @@ abstract class KubernetesClient extends AbstractKubernetes
      */
     public function item(string $name)
     {
-        $items = collect($this->response()['items']);
+        $items = $this->response()['items'];
 
-        return $items->firstWhere('metadata.name', '=', $name) ?? false;
+        foreach ($items as $item) {
+            if ($name == $item['metadata']['name']) {
+                return $item;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -378,7 +383,7 @@ abstract class KubernetesClient extends AbstractKubernetes
      *
      * @return $this
      */
-    private function commonPackage(string $type, array $package = [])
+    protected function commonPackage(string $type, array $package = [])
     {
         if (null == $this->api_version) {
             $this->api_version = self::$resourceTypes[$type]['api_version'];

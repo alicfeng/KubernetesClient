@@ -28,13 +28,13 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      *
      * @param array $package 期待的资源配置
      *
-     * @return mixed
+     * @return $this
      */
     public function create(array $package = [])
     {
-        $uri = "/apis/batch/v1/namespaces/{$this->namespace}/jobs";
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/deployments";
 
-        return $this->_create($uri, self::TYPE_JOB, $package);
+        return $this->_create($uri, self::TYPE_DEPLOYMENT, $package);
     }
 
     /**
@@ -44,13 +44,13 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      * @param string $name    资源名称
      * @param array  $package 期待的资源配置
      *
-     * @return mixed
+     * @return $this
      */
     public function apply(string $name, array $package = [])
     {
         $uri = "/apis/apps/v1/namespaces/{$this->namespace}/deployments/{$name}";
 
-        return $this->_apply($uri, self::TYPE_SERVICE, $package);
+        return $this->_apply($uri, self::TYPE_DEPLOYMENT, $package);
     }
 
     /**
@@ -59,7 +59,7 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      *
      * @param string $name 资源名称
      *
-     * @return mixed
+     * @return $this
      */
     public function remove(string $name)
     {
@@ -74,7 +74,7 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      *
      * @param bool $is_all_namespace 是否为所有命名空间
      *
-     * @return mixed
+     * @return $this
      */
     public function list(bool $is_all_namespace = false)
     {
@@ -92,12 +92,52 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      *
      * @param string $name 资源名称
      *
-     * @return mixed
+     * @return $this
      */
     public function queryStatus(string $name)
     {
         $uri = "/apis/app s/v1/namespaces/{$this->namespace}/deployments/{$name}/status";
 
         return $this->_queryStatus($uri);
+    }
+
+    /**
+     * @function    查看应用部署节点数量
+     * @description 查看节点数量
+     *
+     * @param string $name
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     *
+     * @throws \AlicFeng\Kubernetes\Exception\CommunicationException
+     */
+    public function getScale(string $name)
+    {
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/deployments/{$name}/scale";
+
+        $this->response = $this->get($uri);
+
+        return $this->response();
+    }
+
+    /**
+     * @function    设置应用部署节点数量
+     * @description 设置应用部署节点数量
+     *
+     * @param string $name    应用部署名称
+     * @param array  $package 资源声明内容
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     *
+     * @throws \AlicFeng\Kubernetes\Exception\CommunicationException
+     */
+    public function setScale(string $name, array $package = [])
+    {
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/deployments/{$name}/scale";
+
+        $this->commonPackage(self::TYPE_DEPLOYMENT, $package);
+        $this->response = $this->put($uri);
+
+        return $this->response();
     }
 }
