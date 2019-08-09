@@ -1,0 +1,45 @@
+{
+  "name": "alicfeng/kubernetes-client",
+  "description": "Kubernetes php client",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "Kubernetes",
+    "k8s",
+    "php",
+    "alicfeng",
+    "samego"
+  ],
+  "authors": [
+    {
+      "name": "AlicFeng",
+      "email": "a@samego.com",
+      "homepage": "https://www.samego.com",
+      "role": "Web Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AlicFeng\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "@stable",
+    "composer/composer": "^1.8",
+    "orchestra/testbench": "^3.5"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "guzzlehttp/guzzle": "^6.3",
+    "php": "^7.0",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-gd": "*",
+    "ext-curl": "*"
+  }
+}
