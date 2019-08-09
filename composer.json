@@ -1,6 +1,6 @@
 {
   "name": "alicfeng/kubernetes-client",
-  "description": "Kubernetes php client",
+  "description": "Kubernetes PHP Client",
   "type": "library",
   "license": "MIT",
   "keywords": [
