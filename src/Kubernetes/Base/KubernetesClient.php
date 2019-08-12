@@ -10,7 +10,10 @@
 namespace AlicFeng\Kubernetes\Base;
 
 use AlicFeng\Kubernetes\Exception\CommunicationException;
+use AlicFeng\Kubernetes\Helper\NetworkHelper;
+use Closure;
 use Psr\Http\Message\ResponseInterface;
+use swoole_client;
 
 /**
  * 用于管理Kubernetes集群、编排
@@ -61,6 +64,13 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @var array package.spec - 资源清单数据
      */
     protected $spec = [];
+
+    /**
+     * 监听接收到的请求序号，用于判断事件发生顺序，避免在并发场景下旧数据覆盖新数据.
+     *
+     * @var int
+     */
+    private $receive_count = 0;
 
     public function __construct(array $config = [])
     {
@@ -415,8 +425,78 @@ abstract class KubernetesClient extends AbstractKubernetes
         return $this;
     }
 
-    public static function __callStatic($name, $arguments)
+    /**
+     * @function    资源监控
+     * @description 监控四个事件 Added Modified Deleted Error
+     * Object is: * If Type is Added or Modified: the new state of the object.
+     * If Type is Deleted: the state of the object immediately before deletion.
+     * If Type is Error: *Status is recommended;
+     * other types may make sense depending on context.
+     *
+     * @param string  $uri      资源地址
+     * @param Closure $callback 闭包回调
+     * @param array   $params   资源查询参数
+     * @param int     $port     端口
+     */
+    public function watch(string $uri, Closure $callback, array $params = [], int $port = 6443)
     {
-        return call_user_func([get_called_class(), $name], $arguments);
+        $url  = $this->base_uri.$uri;
+        $host = parse_url($url, PHP_URL_HOST);
+        $path = parse_url($url, PHP_URL_PATH);
+
+        if (!empty($params)) {
+            $path = "{$path}?".http_build_query($params);
+        }
+
+        $request_raw = "GET {$path} HTTP/1.1\r\n";
+        $request_raw .= "Host: {$host}\r\n";
+        $request_raw .= "Authorization: Bearer {$this->token}\r\n\r\n";
+
+        $client = new swoole_client(SWOOLE_SOCK_TCP, SWOOLE_SOCK_ASYNC);
+
+        $chunk_package_setting = [
+            'open_eof_check'     => true,
+            'package_eof'        => "\r\n",
+            'package_max_length' => 1024 * 1024 * 2 * 20,
+        ];
+        $client->set($chunk_package_setting);
+        $client->on('connect', function (swoole_client $cli) use ($request_raw) {
+            // 通讯握手🤝即时发送认证
+            $cli->send($request_raw);
+        });
+
+        $client->on('receive', function (swoole_client $cli, $data) use ($callback) {
+            // 判断是否为http响应头
+            if (false !== strpos($data, 'HTTP/1.1 200')) {
+                return;
+            }
+
+            // 解码 http chunked 数据
+            $data = explode(PHP_EOL, NetworkHelper::chunkedDecode($data));
+            if (empty($data)) {
+                return;
+            }
+
+            // 重整数据
+            $message = [];
+            foreach ($data as $key => $value) {
+                if ('' == $value) {
+                    continue;
+                }
+                $message[] = json_decode($value, true);
+            }
+
+            // 正式处理
+            $callback($message, $this->receive_count++);
+        });
+        $client->on('error', function (swoole_client $cli) use ($host, $port) {
+            // 异常重连
+            $cli->connect($host, $port);
+        });
+
+        $client->on('close', function (swoole_client $cli) {
+        });
+
+        $client->connect($host, $port);
     }
 }
