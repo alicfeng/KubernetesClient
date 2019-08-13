@@ -411,7 +411,7 @@ abstract class KubernetesClient extends AbstractKubernetes
         }
 
         if (array_key_exists('kind', $package) && $package['kind']) {
-            $this->api_version = $package['kind'];
+            $this->kind = $package['kind'];
         }
 
         if (array_key_exists('metadata', $package)) {
@@ -419,7 +419,7 @@ abstract class KubernetesClient extends AbstractKubernetes
         }
 
         if (array_key_exists('spec', $package)) {
-            $this->metadata = array_merge($this->metadata, $package['spec']);
+            $this->spec = array_merge($this->spec, $package['spec']);
         }
 
         return $this;
