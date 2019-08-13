@@ -487,7 +487,7 @@ abstract class KubernetesClient extends AbstractKubernetes
             }
 
             // 正式处理
-            $callback($message, $this->receive_count++);
+            $callback($message, $cli, $this->receive_count++);
         });
         $client->on('error', function (swoole_client $cli) use ($host, $port) {
             // 异常重连
