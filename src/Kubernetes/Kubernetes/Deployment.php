@@ -96,7 +96,7 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      */
     public function queryStatus(string $name)
     {
-        $uri = "/apis/app s/v1/namespaces/{$this->namespace}/deployments/{$name}/status";
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/deployments/{$name}/status";
 
         return $this->_queryStatus($uri);
     }
