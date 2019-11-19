@@ -36,7 +36,7 @@
   "minimum-stability": "stable",
   "require": {
     "guzzlehttp/guzzle": "^6.3",
-    "php": "^7.0",
+    "php": "^7.1",
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-gd": "*",

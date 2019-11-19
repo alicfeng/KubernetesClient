@@ -11,15 +11,6 @@ namespace AlicFeng\Kubernetes\Helper;
 
 class NetworkHelper
 {
-    public static function isHeader(string $data, $search)
-    {
-        if (false !== strpos($data, $search)) {
-            return true;
-        }
-
-        return false;
-    }
-
     /**
      * 解码http chunked数据.
      *

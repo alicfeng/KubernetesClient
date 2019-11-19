@@ -36,6 +36,15 @@ abstract class KubernetesClient extends AbstractKubernetes
     protected $token = null;
 
     /**
+     * @var string k8s username
+     */
+    protected $username = null;
+    /**
+     * @var string k8s password
+     */
+    protected $password = null;
+
+    /**
      * 请求报文.
      *
      * @var array interface package
@@ -64,6 +73,10 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @var array package.spec - 资源清单数据
      */
     protected $spec = [];
+    /**
+     * @var array package.data - 资源清单数据
+     */
+    protected $data = [];
 
     /**
      * 监听接收到的请求序号，用于判断事件发生顺序，避免在并发场景下旧数据覆盖新数据.
@@ -74,19 +87,26 @@ abstract class KubernetesClient extends AbstractKubernetes
 
     public function __construct(array $config = [])
     {
-        $this->token     = $config['token'];
+        $this->token     = $config['token']    ?? null;
+        $this->username  = $config['username'] ?? null;
+        $this->password  = $config['password'] ?? null;
         $this->base_uri  = $config['base_uri'];
         $this->namespace = $config['namespace'] ?? 'default';
-        $default         = [
-            'base_uri' => $this->base_uri,
-            'verify'   => false,
-            'headers'  => [
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer '.$this->token,
-            ],
-        ];
-        $config          = array_merge($default, $config);
-        parent::__construct($config);
+
+        // k8s client configuration
+        $default['base_uri']                = $this->base_uri;
+        $default['verify']                  = false;
+        $default['headers']['Content-Type'] = 'application/json';
+        // auth using token
+        if ($this->token) {
+            $default['headers']['Authorization'] = 'Bearer '.$this->token;
+        }
+        // auth using username as well as password
+        if ($this->username) {
+            $default['auth'] = [$this->username, $this->password];
+        }
+
+        parent::__construct($default);
     }
 
     /**
@@ -165,17 +185,38 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
+     * @function    设置资源清单
+     * @description 设置 package.spec 资源清单信息
+     *
+     * @param array $data 资源清单配置信息
+     *
+     * @return $this
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
      * @function    构建接口报文
      * @description [ apiVersion,kind,metadata,spec ]
      */
     public function builder()
     {
+        // common
         $this->package = [
             'apiVersion' => $this->api_version,
             'kind'       => $this->kind,
-            'metadata'   => $this->metadata,
-            'spec'       => $this->spec,
         ];
+
+        // special
+        foreach (['metadata', 'spec', 'data'] as $item) {
+            if ($this->{$item}) {
+                $this->package[$item] = $this->{$item};
+            }
+        }
     }
 
     /**
@@ -385,6 +426,23 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
+     * @function    获取资源清单数据
+     * @description 已请求获取响应值, 否则获取请求值
+     *
+     * @return array
+     *
+     * @throws
+     */
+    public function getData(): array
+    {
+        if ($this->response) {
+            return $this->response()['data'];
+        }
+
+        return $this->data;
+    }
+
+    /**
      * @function    统一处理 yaml 报文信息
      * @description 除了方法设定外, 灵活二次处理报文
      *
@@ -406,20 +464,16 @@ abstract class KubernetesClient extends AbstractKubernetes
             return $this;
         }
 
+        // apiVersion
         if (array_key_exists('apiVersion', $package) && $package['apiVersion']) {
             $this->api_version = $package['apiVersion'];
         }
 
-        if (array_key_exists('kind', $package) && $package['kind']) {
-            $this->api_version = $package['kind'];
-        }
-
-        if (array_key_exists('metadata', $package)) {
-            $this->metadata = array_merge($this->metadata, $package['metadata']);
-        }
-
-        if (array_key_exists('spec', $package)) {
-            $this->metadata = array_merge($this->metadata, $package['spec']);
+        // ['kind', 'metadata', 'spec', 'data']
+        foreach (['kind', 'metadata', 'spec', 'data'] as $item) {
+            if (array_key_exists($item, $package) && $package[$item]) {
+                $this->{$item} = $package[$item];
+            }
         }
 
         return $this;
@@ -462,6 +516,7 @@ abstract class KubernetesClient extends AbstractKubernetes
         $client->set($chunk_package_setting);
         $client->on('connect', function (swoole_client $cli) use ($request_raw) {
             // 通讯握手🤝即时发送认证
+            echo "connect\n";
             $cli->send($request_raw);
         });
 
@@ -490,6 +545,7 @@ abstract class KubernetesClient extends AbstractKubernetes
             $callback($message, $this->receive_count++);
         });
         $client->on('error', function (swoole_client $cli) use ($host, $port) {
+            echo "error\n";
             // 异常重连
             $cli->connect($host, $port);
         });

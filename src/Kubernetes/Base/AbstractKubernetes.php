@@ -18,6 +18,7 @@ abstract class AbstractKubernetes extends Client
     const TYPE_DEPLOYMENT = 'Deployment';
     const TYPE_POD        = 'Pod';
     const TYPE_JOB        = 'Job';
+    const TYPE_CONFIG_MAP = 'ConfigMap';
 
     /*resource type about apiVersion and kind*/
     public static $resourceTypes = [
@@ -33,9 +34,13 @@ abstract class AbstractKubernetes extends Client
             'api_version' => 'v1',
             'kind'        => 'Service',
         ],
-        self::TYPE_JOB => [
+        self::TYPE_JOB        => [
             'api_version' => 'batch/v1',
             'kind'        => 'Job',
+        ],
+        self::TYPE_CONFIG_MAP => [
+            'api_version' => 'v1',
+            'kind'        => 'ConfigMap',
         ],
     ];
 }
