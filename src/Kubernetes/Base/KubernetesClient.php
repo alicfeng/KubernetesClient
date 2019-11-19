@@ -516,7 +516,6 @@ abstract class KubernetesClient extends AbstractKubernetes
         $client->set($chunk_package_setting);
         $client->on('connect', function (swoole_client $cli) use ($request_raw) {
             // 通讯握手🤝即时发送认证
-            echo "connect\n";
             $cli->send($request_raw);
         });
 
@@ -542,10 +541,9 @@ abstract class KubernetesClient extends AbstractKubernetes
             }
 
             // 正式处理
-            $callback($message, $this->receive_count++);
+            $callback($message, $cli, $this->receive_count++);
         });
         $client->on('error', function (swoole_client $cli) use ($host, $port) {
-            echo "error\n";
             // 异常重连
             $cli->connect($host, $port);
         });
