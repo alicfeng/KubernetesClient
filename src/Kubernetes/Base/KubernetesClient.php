@@ -79,6 +79,11 @@ abstract class KubernetesClient extends AbstractKubernetes
     protected $data = [];
 
     /**
+     * @var array patch header
+     */
+    protected $patch_header = ['Content-Type' => 'application/strategic-merge-patch+json'];
+
+    /**
      * 监听接收到的请求序号，用于判断事件发生顺序，避免在并发场景下旧数据覆盖新数据.
      *
      * @var int
@@ -200,6 +205,28 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
+     * Set patch header
+     *
+     * @param $patch_type
+     */
+    public function setPatchType(string $patch_type = "strategic")
+    {
+        switch ($patch_type){
+            case 'strategic':
+                $this->patch_header = ['Content-Type' => 'application/strategic-merge-patch+json'];
+                break;
+            case 'merge':
+                $this->patch_header = ['Content-Type' => 'application/merge-patch+json'];
+                break;
+            case 'json':
+                $this->patch_header = ['Content-Type' => 'application/json-patch+json'];
+                break;
+            default:
+                $this->patch_header = ['Content-Type' => 'application/strategic-merge-patch+json'];
+        }
+    }
+
+    /**
      * @function    构建接口报文
      * @description [ apiVersion,kind,metadata,spec ]
      */
@@ -317,6 +344,29 @@ abstract class KubernetesClient extends AbstractKubernetes
 
         return $this;
     }
+
+    /**
+     * @function    patch修改资源项
+     * @description patch修改指定资源项
+     *
+     * @param string $uri     api地址
+     * @param string $type    资源类型
+     * @param array  $package 期待的资源配置
+     *
+     * @return $this
+     */
+    protected function _patch(string $uri,string $type ,array $package)
+    {
+        $this->commonPackage($type, $package)->builder();
+
+        $this->response = $this->request('PATCH', $uri, [
+            'json' =>  $this->package,
+            'headers' => $this->patch_header
+        ]);
+
+        return $this;
+    }
+
 
     /**
      * @function    判断是否存在节点
