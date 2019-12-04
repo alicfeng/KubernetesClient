@@ -61,4 +61,15 @@ interface KubernetesManagerIf
      * @return $this
      */
     public function queryStatus(string $name);
+
+    /**
+     * @function   patch修改资源项状态
+     * @description patch修改资源项状态
+     *
+     * @param string $name    资源项名称
+     * @param array  $package 期待的资源配置
+     *
+     * @return $this
+     */
+    public function patch(string $name, array $package);
 }

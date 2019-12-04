@@ -205,13 +205,13 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
-     * Set patch header
+     * Set patch header.
      *
      * @param $patch_type
      */
-    public function setPatchType(string $patch_type = "strategic")
+    public function setPatchType(string $patch_type = 'strategic')
     {
-        switch ($patch_type){
+        switch ($patch_type) {
             case 'strategic':
                 $this->patch_header = ['Content-Type' => 'application/strategic-merge-patch+json'];
                 break;
@@ -355,18 +355,17 @@ abstract class KubernetesClient extends AbstractKubernetes
      *
      * @return $this
      */
-    protected function _patch(string $uri,string $type ,array $package)
+    protected function _patch(string $uri, string $type, array $package)
     {
         $this->commonPackage($type, $package)->builder();
 
         $this->response = $this->request('PATCH', $uri, [
-            'json' =>  $this->package,
-            'headers' => $this->patch_header
+            'json'    => $this->package,
+            'headers' => $this->patch_header,
         ]);
 
         return $this;
     }
-
 
     /**
      * @function    判断是否存在节点

@@ -97,4 +97,19 @@ class Service extends KubernetesClient implements KubernetesManagerIf
 
         return $this->_queryStatus($uri);
     }
+
+    /**
+     * @function    patch 修改资源
+     * @description  patch 修改资源
+     *
+     * @param string $name    资源名称
+     * @param array  $package 期待的资源配置
+     *
+     * @return $this
+     */
+    public function patch(string $name, array $package = [])
+    {
+        // TODO: Implement patch() method.
+        return $this;
+    }
 }
