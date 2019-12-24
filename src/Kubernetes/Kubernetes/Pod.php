@@ -55,14 +55,20 @@ class Pod extends KubernetesClient implements KubernetesManagerIf
      * @description 默认为具体的默认命名空间
      *
      * @param bool $is_all_namespace 是否为所有命名空间
+     * @param array $query 查询参数
      *
      * @return $this
      */
-    public function list(bool $is_all_namespace = false)
+    public function list(bool $is_all_namespace = false, array $query = [])
     {
         $uri = "/api/v1/namespaces/{$this->namespace}/pods";
         if ($is_all_namespace) {
             $uri = '/api/v1/pods';
+        }
+
+        if(!empty($query))
+        {
+            $uri .= '?' . http_build_query($query);
         }
 
         return $this->_list($uri);
@@ -112,6 +118,29 @@ class Pod extends KubernetesClient implements KubernetesManagerIf
     public function patch(string $name, array $package = [])
     {
         // TODO: Implement patch() method.
+        return $this;
+    }
+
+    /**
+     * @desc 获取pod日志
+     * @function log
+     *
+     * @param string $name  pod名称
+     * @param array $query  查询参数
+     *
+     * @return $this
+     */
+    public function log(string $name, array $query = [])
+    {
+        $uri = "/api/v1/namespaces/{$this->namespace}/pods/{$name}/log";
+
+        if(!empty($query))
+        {
+            $uri .= '?' . http_build_query($query);
+        }
+
+        $this->response = $this->get($uri);
+
         return $this;
     }
 }

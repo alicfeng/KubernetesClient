@@ -247,6 +247,18 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
+     * @desc 获取response属性
+     * @function getResponse
+     *
+     * @return ResponseInterface
+     *
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
      * @function    接口请求结果响应
      * @description guzzle response
      *
