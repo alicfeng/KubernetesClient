@@ -251,7 +251,6 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @function getResponse
      *
      * @return ResponseInterface
-     *
      */
     public function getResponse()
     {
@@ -262,11 +261,11 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @function    接口请求结果响应
      * @description guzzle response
      *
-     * @return ResponseInterface
+     * @return array
      *
      * @throws CommunicationException
      */
-    public function response()
+    public function response(): array
     {
         if (!in_array($this->response->getStatusCode(), [200, 201], true)) {
             throw new CommunicationException('communication exception');
