@@ -251,7 +251,6 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @function getResponse
      *
      * @return ResponseInterface
-     *
      */
     public function getResponse()
     {

@@ -6,7 +6,7 @@ A PHP Client For Managing K8S Cluster~
 #### Install
 
 ```shell
-composer require alicfeng/kubernetes-client:v1.0.0rc -vvv
+composer require alicfeng/kubernetes-client:v1.0.3 -vvv
 ```
 
 
@@ -19,12 +19,15 @@ composer require alicfeng/kubernetes-client:v1.0.0rc -vvv
 - Deployment
 - Pod
 - Job
+- ConfigMap
+- DaemonSet
+- Node
+- Secrets
+- StatefulSet
 
 ###### Will Support
 
 - ReplicationController
-- DaemonSet
-- StatefulSet
 
 
 
