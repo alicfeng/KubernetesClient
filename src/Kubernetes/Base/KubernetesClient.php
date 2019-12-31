@@ -9,6 +9,7 @@
 
 namespace AlicFeng\Kubernetes\Base;
 
+use AlicFeng\Kubernetes\Enum\PatchCode;
 use AlicFeng\Kubernetes\Exception\CommunicationException;
 use AlicFeng\Kubernetes\Helper\NetworkHelper;
 use Closure;
@@ -205,32 +206,24 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
-     * Set patch header.
+     * @function Set patch header.
      *
      * @param $patch_type
      */
-    public function setPatchType(string $patch_type = 'strategic')
+    public function setPatchType(string $patch_type = PatchCode::TYPE_STRATEGIC): void
     {
-        switch ($patch_type) {
-            case 'strategic':
-                $this->patch_header = ['Content-Type' => 'application/strategic-merge-patch+json'];
-                break;
-            case 'merge':
-                $this->patch_header = ['Content-Type' => 'application/merge-patch+json'];
-                break;
-            case 'json':
-                $this->patch_header = ['Content-Type' => 'application/json-patch+json'];
-                break;
-            default:
-                $this->patch_header = ['Content-Type' => 'application/strategic-merge-patch+json'];
+        if (false === in_array($patch_type, array_keys(PatchCode::HEADER), true)) {
+            $patch_type = PatchCode::TYPE_STRATEGIC;
         }
+
+        $this->patch_header = PatchCode::HEADER[$patch_type];
     }
 
     /**
      * @function    构建接口报文
      * @description [ apiVersion,kind,metadata,spec ]
      */
-    public function builder()
+    public function builder(): void
     {
         // common
         $this->package = [
@@ -247,7 +240,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
-     * @desc 获取response属性
+     * @desc     获取response属性
      * @function getResponse
      *
      * @return ResponseInterface
@@ -370,7 +363,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     {
         $this->commonPackage($type, $package)->builder();
 
-        $this->response = $this->request('PATCH', $uri, [
+        $this->response = $this->patch($uri, [
             'json'    => $this->package,
             'headers' => $this->patch_header,
         ]);
