@@ -2,9 +2,8 @@
 
 /*
  * What samego team is that is 'one thing, a team, work together'
- * Value comes from technology, technology comes from sharing~
+ * Values comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/KubernetesClient
- * AlicFeng | a@samego.com
  */
 
 namespace AlicFeng\Kubernetes\Kubernetes;
@@ -130,7 +129,7 @@ class Pod extends KubernetesClient implements KubernetesManagerIf
         $uri = "/api/v1/namespaces/{$this->namespace}/pods/{$name}/log";
 
         if (!empty($query)) {
-            $uri .= '?'.http_build_query($query);
+            $uri .= '?' . http_build_query($query);
         }
 
         $this->response = $this->get($uri);

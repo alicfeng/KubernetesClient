@@ -2,9 +2,8 @@
 
 /*
  * What samego team is that is 'one thing, a team, work together'
- * Value comes from technology, technology comes from sharing~
+ * Values comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/KubernetesClient
- * AlicFeng | a@samego.com
  */
 
 namespace AlicFeng\Kubernetes\Base;
@@ -105,7 +104,7 @@ abstract class KubernetesClient extends AbstractKubernetes
         $default['headers']['Content-Type'] = 'application/json';
         // auth using token
         if ($this->token) {
-            $default['headers']['Authorization'] = 'Bearer '.$this->token;
+            $default['headers']['Authorization'] = 'Bearer ' . $this->token;
         }
         // auth using username as well as password
         if ($this->username) {
@@ -331,7 +330,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     protected function _list(string $uri, array $query_parameters = [])
     {
         if (!empty($query_parameters)) {
-            $uri .= '?'.http_build_query($query_parameters);
+            $uri .= '?' . http_build_query($query_parameters);
         }
 
         $this->response = $this->get($uri);
@@ -552,12 +551,12 @@ abstract class KubernetesClient extends AbstractKubernetes
      */
     public function watch(string $uri, Closure $callback, array $params = [], int $port = 6443)
     {
-        $url  = $this->base_uri.$uri;
+        $url  = $this->base_uri . $uri;
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
 
         if (!empty($params)) {
-            $path = "{$path}?".http_build_query($params);
+            $path = "{$path}?" . http_build_query($params);
         }
 
         $request_raw = "GET {$path} HTTP/1.1\r\n";

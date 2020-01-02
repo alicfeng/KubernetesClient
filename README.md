@@ -6,7 +6,7 @@ A PHP Client For Managing K8S Cluster~
 #### Install
 
 ```shell
-composer require alicfeng/kubernetes-client:v1.0.3 -vvv
+composer require alicfeng/kubernetes-client:v1.0.4 -vvv
 ```
 
 
@@ -24,6 +24,7 @@ composer require alicfeng/kubernetes-client:v1.0.3 -vvv
 - Node
 - Secrets
 - StatefulSet
+- Event
 
 ###### Will Support
 
@@ -81,4 +82,4 @@ $serviceClient->list()->item('service-name');
 
 See the API documentation for an explanation of the options:
 
-https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/
