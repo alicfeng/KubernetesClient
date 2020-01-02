@@ -48,15 +48,16 @@ class Node extends KubernetesClient implements KubernetesManagerIf
      * @function    查询资源列表结合
      * @description 默认为具体的默认命名空间
      *
-     * @param bool $is_all_namespace 是否为所有命名空间
+     * @param bool  $is_all_namespace 是否为所有命名空间
+     * @param array $query_parameters 查询参数
      *
      * @return $this
      */
-    public function list(bool $is_all_namespace = false)
+    public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
         $uri = '/api/v1/nodes';
 
-        return $this->_list($uri);
+        return $this->_list($uri, $query_parameters);
     }
 
     /**

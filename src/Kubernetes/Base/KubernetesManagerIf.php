@@ -46,11 +46,12 @@ interface KubernetesManagerIf
      * @function    查询资源列表结合
      * @description 默认为具体的默认命名空间
      *
-     * @param bool $is_all_namespace 是否为所有命名空间
+     * @param bool  $is_all_namespace 是否为所有命名空间
+     * @param array $query_parameters 列表查询参数，详见：https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17
      *
      * @return $this
      */
-    public function list(bool $is_all_namespace = false);
+    public function list(bool $is_all_namespace = false, array $query_parameters = []);
 
     /**
      * @function    查询资源项状态

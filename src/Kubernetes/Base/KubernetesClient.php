@@ -324,11 +324,16 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @description 查询资源列表结合
      *
      * @param string $uri
+     * @param array  $query_parameters
      *
      * @return $this
      */
-    protected function _list(string $uri)
+    protected function _list(string $uri, array $query_parameters = [])
     {
+        if (!empty($query_parameters)) {
+            $uri .= '?'.http_build_query($query_parameters);
+        }
+
         $this->response = $this->get($uri);
 
         return $this;
