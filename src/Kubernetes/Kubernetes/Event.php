@@ -29,7 +29,7 @@ class Event extends KubernetesClient implements KubernetesManagerIf
     }
 
     /**
-     * @desc 查询event事件列表
+     * @description查询event事件列表
      * @function list
      *
      * @param bool  $is_all_namespace

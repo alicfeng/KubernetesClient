@@ -239,7 +239,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
-     * @desc     获取response属性
+     * @description    获取response属性
      * @function getResponse
      *
      * @return ResponseInterface

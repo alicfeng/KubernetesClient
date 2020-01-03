@@ -116,7 +116,7 @@ class Pod extends KubernetesClient implements KubernetesManagerIf
     }
 
     /**
-     * @desc 获取pod日志
+     * @description获取pod日志
      * @function log
      *
      * @param string $name  pod名称
