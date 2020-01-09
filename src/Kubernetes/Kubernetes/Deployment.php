@@ -142,18 +142,18 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
     }
 
     /**
-     * @function    patch 修改资源
-     * @description  patch 修改资源
+     * @function     修改部分资源项
+     * @description  修改部分资源项
      *
      * @param string $name    资源名称
      * @param array  $package 期待的资源配置
      *
      * @return $this
      */
-    public function patch(string $name, array $package = [])
+    public function repair(string $name, array $package = [])
     {
         $uri = "/apis/apps/v1/namespaces/{$this->namespace}/deployments/{$name}";
 
-        return $this->_patch($uri, self::TYPE_DEPLOYMENT, $package);
+        return $this->_repair($uri, self::TYPE_DEPLOYMENT, $package);
     }
 }

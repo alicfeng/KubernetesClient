@@ -52,8 +52,8 @@ class Event extends KubernetesClient implements KubernetesManagerIf
         // TODO: Implement queryStatus() method.
     }
 
-    public function patch(string $name, array $package)
+    public function repair(string $name, array $package)
     {
-        // TODO: Implement patch() method.
+        // TODO: Implement repair() method.
     }
 }

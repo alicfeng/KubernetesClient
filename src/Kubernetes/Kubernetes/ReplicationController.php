@@ -86,17 +86,17 @@ class ReplicationController extends KubernetesClient implements KubernetesManage
     }
 
     /**
-     * @function    patch 修改资源
-     * @description  patch 修改资源
+     * @function     修改部分资源项
+     * @description  修改部分资源项
      *
      * @param string $name    资源名称
      * @param array  $package 期待的资源配置
      *
      * @return $this
      */
-    public function patch(string $name, array $package = [])
+    public function repair(string $name, array $package = [])
     {
-        // TODO: Implement patch() method.
+        // TODO: Implement repair() method.
         return $this;
     }
 }

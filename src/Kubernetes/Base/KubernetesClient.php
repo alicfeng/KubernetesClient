@@ -354,8 +354,8 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
-     * @function    patch修改资源项
-     * @description patch修改指定资源项
+     * @function     修改部分资源项
+     * @description  修改部分资源项
      *
      * @param string $uri     api地址
      * @param string $type    资源类型
@@ -363,7 +363,7 @@ abstract class KubernetesClient extends AbstractKubernetes
      *
      * @return $this
      */
-    protected function _patch(string $uri, string $type, array $package)
+    protected function _repair(string $uri, string $type, array $package)
     {
         $this->commonPackage($type, $package)->builder();
 
