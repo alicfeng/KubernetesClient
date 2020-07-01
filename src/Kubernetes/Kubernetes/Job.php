@@ -57,7 +57,9 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      */
     public function remove(string $name)
     {
-        // TODO: Implement remove() method.
+        $uri = "/apis/batch/v1/namespaces/{$this->namespace}/jobs/{$name}";
+
+        return $this->_remove($uri);
     }
 
     /**
