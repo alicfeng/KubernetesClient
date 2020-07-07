@@ -13,11 +13,11 @@ use GuzzleHttp\Client;
 abstract class AbstractKubernetes extends Client
 {
     /*resource type*/
-    const TYPE_SERVICE    = 'Service';
-    const TYPE_DEPLOYMENT = 'Deployment';
-    const TYPE_POD        = 'Pod';
-    const TYPE_JOB        = 'Job';
-    const TYPE_CONFIG_MAP = 'ConfigMap';
+    const TYPE_SERVICE                 = 'Service';
+    const TYPE_DEPLOYMENT              = 'Deployment';
+    const TYPE_POD                     = 'Pod';
+    const TYPE_JOB                     = 'Job';
+    const TYPE_CONFIG_MAP              = 'ConfigMap';
     const TYPE_PERSISTENT_VOLUME_CLAIM = 'PersistentVolumeClaim';
 
     /*resource type about apiVersion and kind*/
@@ -42,9 +42,9 @@ abstract class AbstractKubernetes extends Client
             'api_version' => 'v1',
             'kind'        => 'ConfigMap',
         ],
-        self::TYPE_PERSISTENT_VOLUME_CLAIM =>[
+        self::TYPE_PERSISTENT_VOLUME_CLAIM => [
             'api_version' => 'v1',
             'kind'        => 'PersistentVolumeClaim',
-        ]
+        ],
     ];
 }

@@ -6,7 +6,7 @@ A PHP Client For Managing K8S Cluster~
 #### Install
 
 ```shell
-composer require alicfeng/kubernetes-client:v1.0.4 -vvv
+composer require alicfeng/kubernetes-client -vvv
 ```
 
 
@@ -25,6 +25,7 @@ composer require alicfeng/kubernetes-client:v1.0.4 -vvv
 - Secrets
 - StatefulSet
 - Event
+- Pvc
 
 ###### Will Support
 

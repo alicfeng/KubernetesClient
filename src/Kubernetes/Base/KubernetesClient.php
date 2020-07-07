@@ -279,7 +279,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     protected function _create(string $uri, string $type, array $package)
     {
         $this->commonPackage($type, $package)->builder();
-  
+
         $this->response = $this->post($uri, ['json' => $this->package]);
 
         return $this;
