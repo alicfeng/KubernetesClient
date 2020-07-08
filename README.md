@@ -26,6 +26,7 @@ composer require alicfeng/kubernetes-client -vvv
 - StatefulSet
 - Event
 - Pvc
+- PersistentVolumeClaim
 
 ###### Will Support
 
