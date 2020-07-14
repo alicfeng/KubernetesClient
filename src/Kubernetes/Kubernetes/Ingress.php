@@ -23,7 +23,7 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
      */
     public function create(array $package = [])
     {
-        $uri = "apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses";
+        $uri = "/apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses";
 
         return $this->_create($uri, self::TYPE_DEPLOYMENT, $package);
     }
@@ -52,7 +52,7 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
      */
     public function remove(string $name)
     {
-        $uri = "apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses/{$name}";
+        $uri = "/apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses/{$name}";
 
         return $this->_remove($uri);
     }
