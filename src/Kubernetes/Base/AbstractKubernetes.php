@@ -19,6 +19,7 @@ abstract class AbstractKubernetes extends Client
     const TYPE_JOB                     = 'Job';
     const TYPE_CONFIG_MAP              = 'ConfigMap';
     const TYPE_PERSISTENT_VOLUME_CLAIM = 'PersistentVolumeClaim';
+    const TYPE_INGRESS                 = 'Ingress';
 
     /*resource type about apiVersion and kind*/
     public static $resourceTypes = [
@@ -45,6 +46,10 @@ abstract class AbstractKubernetes extends Client
         self::TYPE_PERSISTENT_VOLUME_CLAIM => [
             'api_version' => 'v1',
             'kind'        => 'PersistentVolumeClaim',
+        ],
+        self::TYPE_INGRESS => [
+            'api_version' => 'extensions/v1beta1',
+            'kind'        => 'Ingress',
         ],
     ];
 }

@@ -27,6 +27,7 @@ composer require alicfeng/kubernetes-client -vvv
 - Event
 - Pvc
 - PersistentVolumeClaim
+- Ingress
 
 ###### Will Support
 
