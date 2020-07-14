@@ -52,7 +52,7 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
      */
     public function remove(string $name)
     {
-        $uri = "apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses{$name}";
+        $uri = "apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses/{$name}";
 
         return $this->_remove($uri);
     }
