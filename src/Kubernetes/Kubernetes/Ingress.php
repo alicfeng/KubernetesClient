@@ -25,7 +25,7 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
     {
         $uri = "/apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses";
 
-        return $this->_create($uri, self::TYPE_DEPLOYMENT, $package);
+        return $this->_create($uri, self::TYPE_INGRESS, $package);
     }
 
     /**
