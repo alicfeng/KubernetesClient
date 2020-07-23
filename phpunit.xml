@@ -19,4 +19,11 @@
             <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
+
+    <php>
+        <env name="host" value="https://192.168.1.67"/>
+        <env name="port" value="6443"/>
+        <env name="username" value="admin"/>
+        <env name="password" value="Extremevision2019"/>
+    </php>
 </phpunit>

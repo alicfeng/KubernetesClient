@@ -11,13 +11,14 @@ namespace AlicFeng\Kubernetes\Helper;
 class NetworkHelper
 {
     /**
-     * 解码http chunked数据.
-     *
-     * @param string $data
-     *
+     * @function    chunkedDecode
+     * @description 解码http chunked数据.
+     * @param string $data 需要解码的字符串数据
      * @return string
+     * @author      AlicFeng
+     * @datatime    20-7-23 下午5:28
      */
-    public static function chunkedDecode($data)
+    public static function chunkedDecode($data): string
     {
         list($pos, $package) = [0, ''];
         while ($pos < strlen($data)) {

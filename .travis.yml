@@ -1,0 +1,27 @@
+sudo: false
+
+os:
+  - linux
+
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - php --version
+  - composer --version
+  - composer self-update
+
+install:
+  - composer install -vvv
+
+script:
+  - php vendor/bin/phpunit -c phpunit.xml
