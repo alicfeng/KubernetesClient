@@ -4,25 +4,22 @@
     </a>
 </h1>
 <p align="center">
-    A PHP Client For Manage Kubernetes Cluster~
+    A PHP Client For Manage Kubernetes Cluster
      <br>
-    Base Kubernetes Office Interface as well as dependence GuzzleHttp To Generate.
+    Based on official of Kubernetest interface as well as dependent GuzzleHttp to generate.
 </p>
 <p align="center">
-    <a href="https://travis-ci.org/alicfeng/kubernetes-client">
+    <a href="https://travis-ci.com/github/alicfeng/KubernetesClient">
         <img src="https://img.shields.io/travis/alicfeng/kubernetes-client/master.svg" alt="Build Status">
     </a>
     <a href="https://packagist.org/packages/alicfeng/kubernetes-client">
         <img src="https://poser.pugx.org/alicfeng/kubernetes-client/v/stable.svg" alt="Latest Stable Version">
     </a>
-    <a href="https://packagist.org/packages/alicfeng/IdentityCard">
+    <a href="https://packagist.org/packages/alicfeng/kubernetes-client">
         <img src="https://poser.pugx.org/alicfeng/kubernetes-client/d/total.svg" alt="Total Downloads">
     </a>
     <a href="https://packagist.org/packages/alicfeng/kubernetes-client">
         <img src="https://poser.pugx.org/alicfeng/kubernetes-client/license.svg" alt="License">
-    </a>
-    <a href="https://github.com/alicfeng/IdentityCard">
-        <img src="https://travis-ci.org/alicfeng/IdentityCard.svg?branch=master" alt="build status">
     </a>
 </p>
 
