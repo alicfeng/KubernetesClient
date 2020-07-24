@@ -21,9 +21,9 @@
     </filter>
 
     <php>
-        <env name="host" value="https://192.168.1.67"/>
+        <env name="host" value="https://127.0.0.1"/>
         <env name="port" value="6443"/>
         <env name="username" value="admin"/>
-        <env name="password" value="Extremevision2019"/>
+        <env name="password" value="admin"/>
     </php>
 </phpunit>
