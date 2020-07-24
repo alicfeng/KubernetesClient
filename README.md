@@ -10,7 +10,7 @@
 </p>
 <p align="center">
     <a href="https://travis-ci.com/github/alicfeng/KubernetesClient">
-        <img src="https://img.shields.io/travis/alicfeng/kubernetes-client/master.svg" alt="Build Status">
+        <img src="https://travis-ci.com/alicfeng/KubernetesClient.svg?branch=master" alt="Build Status">
     </a>
     <a href="https://packagist.org/packages/alicfeng/kubernetes-client">
         <img src="https://poser.pugx.org/alicfeng/kubernetes-client/v/stable.svg" alt="Latest Stable Version">
