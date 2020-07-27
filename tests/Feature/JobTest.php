@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class JobTest extends TestCase
 {
-    public function testCreate()
+    public function testCreate(): void
     {
         $response = Kubernetes::job(self::getKubernetesConfig())
             ->setApiVersion('batch/v1')
@@ -45,7 +45,7 @@ class JobTest extends TestCase
         $this->assertKubernetesResponse($response);
     }
 
-    public function testList()
+    public function testList(): void
     {
         $response = Kubernetes::job(self::getKubernetesConfig())
             ->setNamespace($this->getNamespace())
@@ -54,7 +54,7 @@ class JobTest extends TestCase
         $this->assertKubernetesResponse($response);
     }
 
-    public function testListAllNamespace()
+    public function testListAllNamespace(): void
     {
         $response = Kubernetes::job(self::getKubernetesConfig())
             ->list(true);
@@ -62,7 +62,7 @@ class JobTest extends TestCase
         $this->assertKubernetesResponse($response);
     }
 
-    public function testQueryStatus()
+    public function testQueryStatus(): void
     {
         $response = Kubernetes::job(self::getKubernetesConfig())
             ->setNamespace($this->getNamespace())
@@ -71,7 +71,7 @@ class JobTest extends TestCase
         $this->assertKubernetesResponse($response);
     }
 
-    public function testRepair()
+    public function testRepair(): void
     {
         $response = Kubernetes::job(self::getKubernetesConfig())
             ->setNamespace($this->getNamespace())
@@ -84,7 +84,7 @@ class JobTest extends TestCase
         $this->assertKubernetesResponse($response);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $response = Kubernetes::job(self::getKubernetesConfig())
             ->setNamespace($this->getNamespace())

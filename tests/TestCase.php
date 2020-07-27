@@ -43,7 +43,7 @@ class TestCase extends BaseTestCase
 
     /**
      * @function    assertKubernetesResponse
-     * @description assertKubernetesResponse
+     * @description 断言 Kubernetes 响应
      * @param KubernetesClient $response
      * @author      AlicFeng
      * @datatime    20-7-27 下午3:44
