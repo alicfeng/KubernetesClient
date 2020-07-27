@@ -24,4 +24,4 @@ install:
   - composer install -vvv
 
 script:
-  - php vendor/bin/phpunit -c phpunit.xml
+  - php vendor/bin/phpunit -c phpunit.xml tests/Unit/AppObjectTest.php
