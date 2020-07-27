@@ -45,9 +45,8 @@ class AppObjectTest extends TestCase
     // 测试资源对象生成
     public function testObjectCreate()
     {
-        env('');
         foreach (self::RESOURCE_OBJS as $object => $class) {
-            $configMap = Kubernetes::$object(static::kubernetesConfig());
+            $configMap = Kubernetes::$object(self::getKubernetesConfig());
 
             self::assertEquals(get_class($configMap), $class);
             self::assertNotNull($configMap);

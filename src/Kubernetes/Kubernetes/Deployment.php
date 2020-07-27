@@ -10,6 +10,8 @@ namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
 use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Exception\CommunicationException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Deployment | 应用部署管理类.
@@ -107,9 +109,9 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      *
      * @param string $name
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      *
-     * @throws \AlicFeng\Kubernetes\Exception\CommunicationException
+     * @throws CommunicationException
      */
     public function getScale(string $name)
     {
@@ -127,9 +129,9 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
      * @param string $name    应用部署名称
      * @param array  $package 资源声明内容
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      *
-     * @throws \AlicFeng\Kubernetes\Exception\CommunicationException
+     * @throws CommunicationException
      */
     public function setScale(string $name, array $package = [])
     {

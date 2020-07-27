@@ -73,7 +73,9 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
-        // TODO: Implement list() method.
+        $uri = $is_all_namespace ? '/apis/batch/v1/jobs' : "/api/v1/namespaces/{$this->namespace}/configmaps";
+
+        return $this->_list($uri, $query_parameters);
     }
 
     /**
@@ -86,7 +88,9 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      */
     public function queryStatus(string $name)
     {
-        // TODO: Implement queryStatus() method.
+        $uri = "/apis/batch/v1/namespaces/{$this->namespace}/jobs/{$name}/status";
+
+        return $this->_queryStatus($uri);
     }
 
     /**
@@ -100,7 +104,8 @@ class Job extends KubernetesClient implements KubernetesManagerIf
      */
     public function repair(string $name, array $package = [])
     {
-        // TODO: Implement repair() method.
-        return $this;
+        $uri = "/apis/batch/v1/namespaces/{$this->namespace}/jobs/{$name}";
+
+        return $this->_repair($uri, self::TYPE_JOB, $package);
     }
 }
