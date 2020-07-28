@@ -430,7 +430,7 @@ abstract class KubernetesClient extends AbstractKubernetes
      */
     private function getResponseResult(string $type): array
     {
-        return json_decode($this->response->getBody()->getContents(), true)[$type];
+        return json_decode($this->response->getBody()->getContents(), true)[$type] ?? [];
     }
 
     /**
@@ -510,6 +510,23 @@ abstract class KubernetesClient extends AbstractKubernetes
         }
 
         return $this->data;
+    }
+
+    /**
+     * @function    获取资源清单数据
+     * @description 已请求获取响应值, 否则获取请求值
+     *
+     * @return array
+     *
+     * @throws
+     */
+    public function getStatus(): array
+    {
+        if ($this->response) {
+            return$this->getResponseResult('status');
+        }
+
+        return [];
     }
 
     /**
