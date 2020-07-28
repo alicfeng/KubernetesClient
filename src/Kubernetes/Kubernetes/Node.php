@@ -94,7 +94,8 @@ class Node extends KubernetesClient implements KubernetesManagerIf
      */
     public function repair(string $name, array $package = [])
     {
-        // TODO: Implement repair() method.
-        return $this;
+        $uri = "/api/v1/nodes/{$name}";
+
+        return $this->_repair($uri, self::TYPE_DEPLOYMENT, $package);
     }
 }

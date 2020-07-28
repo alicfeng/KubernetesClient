@@ -21,6 +21,7 @@ abstract class AbstractKubernetes extends Client
     const TYPE_PERSISTENT_VOLUME_CLAIM = 'PersistentVolumeClaim';
     const TYPE_INGRESS                 = 'Ingress';
     const TYPE_SECRET                  = 'Secret';
+    const TYPE_NODE                    = 'Node';
 
     /*resource type about apiVersion and kind*/
     public static $resourceTypes = [
@@ -55,6 +56,10 @@ abstract class AbstractKubernetes extends Client
         self::TYPE_SECRET                  => [
             'api_version' => 'v1',
             'kind'        => 'Secret',
+        ],
+        self::TYPE_NODE                    => [
+            'api_version' => 'v1',
+            'kind'        => 'Node',
         ],
     ];
 }

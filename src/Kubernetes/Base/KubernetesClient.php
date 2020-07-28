@@ -240,7 +240,7 @@ abstract class KubernetesClient extends AbstractKubernetes
 
     /**
      * @description    获取response属性
-     * @function getResponse
+     * @function       getResponse
      *
      * @return ResponseInterface
      */
@@ -421,15 +421,28 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
+     * @function    getResponseResult
+     * @description 获取响应结果信息
+     * @param string $type 资源类型
+     * @return array|string
+     * @author      AlicFeng
+     * @datatime    20-7-28 下午4:25
+     */
+    private function getResponseResult(string $type): array
+    {
+        return json_decode($this->response->getBody()->getContents(), true)[$type];
+    }
+
+    /**
      * @function    获取 api 版本
      * @description 已请求获取响应值, 否则获取请求值
      *
      * @return string
      */
-    public function getApiVersion()
+    public function getApiVersion(): string
     {
         if ($this->response) {
-            return json_decode($this->response, true)['apiVersion'];
+            return $this->getResponseResult('apiVersion');
         }
 
         return $this->api_version;
@@ -444,7 +457,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     public function getKind(): string
     {
         if ($this->response) {
-            return json_decode($this->response, true)['kind'];
+            return $this->getResponseResult('kind');
         }
 
         return $this->kind;
@@ -459,7 +472,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     public function getMetadata(): array
     {
         if ($this->response) {
-            return json_decode($this->response, true)['metadata'];
+            return $this->getResponseResult('metadata');
         }
 
         return $this->metadata;
@@ -476,7 +489,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     public function getSpec(): array
     {
         if ($this->response) {
-            return $this->response()['spec'];
+            return $this->getResponseResult('spec');
         }
 
         return $this->spec;
@@ -493,7 +506,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     public function getData(): array
     {
         if ($this->response) {
-            return $this->response()['data'];
+            return$this->getResponseResult('data');
         }
 
         return $this->data;
