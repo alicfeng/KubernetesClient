@@ -36,7 +36,18 @@ class PersistentVolumeClaimTest extends TestCase
 
     public function testQueryStatus(): void
     {
-        $response = Kubernetes::persistentVolumeClaim(self::getKubernetesConfig())->setNamespace($this->getNamespace())->queryStatus(self::PVC_NAME);
+        $response = Kubernetes::persistentVolumeClaim(self::getKubernetesConfig())
+            ->setNamespace($this->getNamespace())
+            ->queryStatus(self::PVC_NAME);
+
+        $this->assertKubernetesResponse($response);
+    }
+
+    public function testDelete(): void
+    {
+        $response = Kubernetes::persistentVolumeClaim(self::getKubernetesConfig())
+            ->setNamespace($this->getNamespace())
+            ->remove(self::PVC_NAME);
 
         $this->assertKubernetesResponse($response);
     }

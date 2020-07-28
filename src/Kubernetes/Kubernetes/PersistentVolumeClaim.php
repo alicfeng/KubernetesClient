@@ -86,7 +86,9 @@ class PersistentVolumeClaim extends KubernetesClient implements KubernetesManage
      */
     public function remove(string $name)
     {
-        return $this;
+        $uri = "/api/v1/namespaces/{$this->namespace}/persistentvolumeclaims/{$name}";
+
+        return $this->_remove($uri);
     }
 
     /**
@@ -105,7 +107,7 @@ class PersistentVolumeClaim extends KubernetesClient implements KubernetesManage
 
     /**
      * @description获取pod日志
-     * @function log
+     * @function   log
      *
      * @param string $name  pod名称
      * @param array  $query 查询参数
