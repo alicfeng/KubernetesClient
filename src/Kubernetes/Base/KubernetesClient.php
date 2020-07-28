@@ -530,6 +530,23 @@ abstract class KubernetesClient extends AbstractKubernetes
     }
 
     /**
+     * @function    获取资源清单数据
+     * @description 已请求获取响应值, 否则获取请求值
+     *
+     * @return array
+     *
+     * @throws
+     */
+    public function getItems(): array
+    {
+        if ($this->response) {
+            return$this->getResponseResult('items');
+        }
+
+        return [];
+    }
+
+    /**
      * @function    统一处理 yaml 报文信息
      * @description 除了方法设定外, 灵活二次处理报文
      *
