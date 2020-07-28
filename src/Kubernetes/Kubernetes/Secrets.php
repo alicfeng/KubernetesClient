@@ -30,7 +30,7 @@ class Secrets extends KubernetesClient implements KubernetesManagerIf
     {
         $uri = "/api/v1/namespaces/{$this->namespace}/secrets";
 
-        return $this->_create($uri, self::TYPE_SERVICE, $package);
+        return $this->_create($uri, self::TYPE_SECRET, $package);
     }
 
     /**
@@ -46,7 +46,7 @@ class Secrets extends KubernetesClient implements KubernetesManagerIf
     {
         $uri = "/api/v1/namespaces/{$this->namespace}/secrets/{$name}";
 
-        return $this->_apply($uri, self::TYPE_SERVICE, $package);
+        return $this->_apply($uri, self::TYPE_SECRET, $package);
     }
 
     /**
