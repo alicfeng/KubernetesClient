@@ -8,6 +8,7 @@
 
 namespace Tests\Unit;
 
+use AlicFeng\Kubernetes\Base\AbstractKubernetes;
 use AlicFeng\Kubernetes\Kubernetes;
 use AlicFeng\Kubernetes\Kubernetes\ConfigMap;
 use AlicFeng\Kubernetes\Kubernetes\DaemonSet;
@@ -51,6 +52,18 @@ class AppObjectTest extends TestCase
             self::assertEquals(get_class($configMap), $class);
             self::assertNotNull($configMap);
             self::assertIsObject($configMap);
+        }
+    }
+
+    public function testObjectVar()
+    {
+        foreach (AbstractKubernetes::$resourceTypes as $type => $value) {
+            self::assertIsArray($value);
+            self::assertEquals($type, $value['kind']);
+            self::assertArrayHasKey('kind', $value);
+            self::assertArrayHasKey('api_version', $value);
+            $this->assertIsString($value['kind']);
+            $this->assertIsString($value['api_version']);
         }
     }
 }
