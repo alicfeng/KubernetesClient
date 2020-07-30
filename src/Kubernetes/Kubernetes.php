@@ -55,7 +55,7 @@ class Kubernetes
      * @return mixed
      * @author      AlicFeng
      */
-    public static function make(string $name, array $config)
+    private static function make(string $name, array $config)
     {
         $namespace   = ucfirst($name);
         $application = "\\AlicFeng\\Kubernetes\\Kubernetes\\{$namespace}";
@@ -75,5 +75,19 @@ class Kubernetes
     public function __call($name, $arguments)
     {
         return self::make($name, $this->config);
+    }
+
+    /**
+     * @function    __callStatic
+     * @description dynamically pass methods to the application
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     * @author      AlicFeng
+     * @datatime    20-7-30 下午5:31
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        return self::make($name, ...$arguments);
     }
 }
