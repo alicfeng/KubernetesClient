@@ -41,6 +41,13 @@ use AlicFeng\Kubernetes\Kubernetes\StatefulSet;
  */
 class Kubernetes
 {
+    private $config;
+
+    public function __construct(array $config)
+    {
+        $this->config = $config;
+    }
+
     /**
      * @description make application container(obj)
      * @param string $name   server name
@@ -57,14 +64,16 @@ class Kubernetes
     }
 
     /**
+     * @function    __call
      * @description dynamically pass methods to the application
-     * @param string $name
-     * @param array  $arguments
+     * @param $name
+     * @param $arguments
      * @return mixed
      * @author      AlicFeng
+     * @datatime    20-7-30 下午5:31
      */
-    public static function __callStatic($name, $arguments)
+    public function __call($name, $arguments)
     {
-        return self::make($name, ...$arguments);
+        return self::make($name, $this->config);
     }
 }

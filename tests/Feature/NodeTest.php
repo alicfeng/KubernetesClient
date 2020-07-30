@@ -18,7 +18,6 @@ class NodeTest extends TestCase
     public function testList(): void
     {
         $response = Kubernetes::node(self::getKubernetesConfig())->list();
-
         $this->assertKubernetesResponse($response);
     }
 
