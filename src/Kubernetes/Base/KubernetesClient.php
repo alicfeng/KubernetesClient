@@ -12,6 +12,7 @@ use AlicFeng\Kubernetes\Enum\PatchCode;
 use AlicFeng\Kubernetes\Exception\CommunicationException;
 use AlicFeng\Kubernetes\Helper\NetworkHelper;
 use Closure;
+use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use swoole_client;
 
@@ -306,13 +307,16 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    删除资源项
      * @description 删除指定资源项
-     *
      * @param string $uri
-     *
+     * @param array  $query_parameters
      * @return $this
      */
-    protected function _remove(string $uri)
+    protected function _remove(string $uri, array $query_parameters = [])
     {
+        if (!empty($query_parameters)) {
+            $uri .= '?' . http_build_query($query_parameters);
+        }
+
         $this->response = $this->delete($uri);
 
         return $this;
@@ -321,10 +325,8 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    查询资源列表结合
      * @description 查询资源列表结合
-     *
      * @param string $uri
      * @param array  $query_parameters
-     *
      * @return $this
      */
     protected function _list(string $uri, array $query_parameters = [])
@@ -341,9 +343,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    查询资源状态
      * @description 查询具体资源状态
-     *
      * @param string $uri
-     *
      * @return $this
      */
     protected function _queryStatus(string $uri)
@@ -356,11 +356,9 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function     修改部分资源项
      * @description  修改部分资源项
-     *
      * @param string $uri     api地址
      * @param string $type    资源类型
      * @param array  $package 期待的资源配置
-     *
      * @return $this
      */
     protected function _repair(string $uri, string $type, array $package)
@@ -403,8 +401,7 @@ abstract class KubernetesClient extends AbstractKubernetes
      *
      * @param string $name 名称
      *
-     * @return bool|\Illuminate\Support\Collection|mixed
-     *
+     * @return bool|Collection|mixed
      * @throws CommunicationException
      */
     public function item(string $name)
@@ -451,7 +448,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取类型
      * @description 已请求获取响应值, 否则获取请求值
-     *
      * @return string
      */
     public function getKind(): string
@@ -466,7 +462,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取元数据
      * @description 已请求获取响应值, 否则获取请求值
-     *
      * @return array
      */
     public function getMetadata(): array
@@ -481,9 +476,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     *
      * @return array
-     *
      * @throws
      */
     public function getSpec(): array
@@ -498,15 +491,13 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     *
      * @return array
-     *
      * @throws
      */
     public function getData(): array
     {
         if ($this->response) {
-            return$this->getResponseResult('data');
+            return $this->getResponseResult('data');
         }
 
         return $this->data;
@@ -515,15 +506,13 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     *
      * @return array
-     *
      * @throws
      */
     public function getStatus(): array
     {
         if ($this->response) {
-            return$this->getResponseResult('status');
+            return $this->getResponseResult('status');
         }
 
         return [];
@@ -532,15 +521,13 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     *
      * @return array
-     *
      * @throws
      */
     public function getItems(): array
     {
         if ($this->response) {
-            return$this->getResponseResult('items');
+            return $this->getResponseResult('items');
         }
 
         return [];
@@ -549,10 +536,8 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    统一处理 yaml 报文信息
      * @description 除了方法设定外, 灵活二次处理报文
-     *
      * @param string $type    类型
      * @param array  $package 报文信息
-     *
      * @return $this
      */
     protected function commonPackage(string $type, array $package = [])

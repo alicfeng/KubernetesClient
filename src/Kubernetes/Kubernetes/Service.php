@@ -52,16 +52,15 @@ class Service extends KubernetesClient implements KubernetesManagerIf
     /**
      * @function    删除资源项
      * @description 删除指定资源项
-     *
-     * @param string $name 资源名称
-     *
+     * @param string $name             资源名称
+     * @param array  $query_parameters 可选参数
      * @return $this
      */
-    public function remove(string $name)
+    public function remove(string $name, array $query_parameters = [])
     {
         $uri = "/api/v1/namespaces/{$this->namespace}/services/{$name}";
 
-        return $this->_remove($uri);
+        return $this->_remove($uri, $query_parameters);
     }
 
     /**

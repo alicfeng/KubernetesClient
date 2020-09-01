@@ -88,7 +88,7 @@ class JobTest extends TestCase
     {
         $response = Kubernetes::job(self::getKubernetesConfig())
             ->setNamespace($this->getNamespace())
-            ->remove('testing-job');
+            ->remove('testing-job', ['propagationPolicy' => 'Foreground']);
 
         $this->assertKubernetesResponse($response);
     }
