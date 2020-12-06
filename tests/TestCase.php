@@ -16,7 +16,6 @@ class TestCase extends BaseTestCase
     /**
      * @function    kubernetesConfig
      * @description 获取 Kubernetes 环境配置
-     * @return array
      * @author      AlicFeng
      * @datatime    20-7-23 下午5:26
      */
@@ -32,7 +31,6 @@ class TestCase extends BaseTestCase
     /**
      * @function    getNamespace
      * @description 获取命名空间
-     * @return string
      * @author      AlicFeng
      * @datatime    20-7-27 下午3:26
      */

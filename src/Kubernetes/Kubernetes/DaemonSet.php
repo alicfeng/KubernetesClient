@@ -23,8 +23,9 @@ class DaemonSet extends KubernetesClient implements KubernetesManagerIf
      */
     public function create(array $package = [])
     {
-        // TODO: Implement create() method.
-        return $this;
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/daemonsets";
+
+        return $this->_create($uri, self::TYPE_DAEMONSET, $package);
     }
 
     /**
@@ -38,8 +39,9 @@ class DaemonSet extends KubernetesClient implements KubernetesManagerIf
      */
     public function apply(string $name, array $package = [])
     {
-        // TODO: Implement apply() method.
-        return $this;
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/daemonsets/{$name}";
+
+        return $this->_apply($uri, self::TYPE_DAEMONSET, $package);
     }
 
     /**
@@ -52,8 +54,9 @@ class DaemonSet extends KubernetesClient implements KubernetesManagerIf
      */
     public function remove(string $name, array $query_parameters = [])
     {
-        // TODO: Implement remove() method.
-        return $this;
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/daemonsets/{$name}";
+
+        return $this->_remove($uri, $query_parameters);
     }
 
     /**
@@ -67,8 +70,12 @@ class DaemonSet extends KubernetesClient implements KubernetesManagerIf
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
-        // TODO: Implement list() method.
-        return $this;
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/daemonsets";
+        if ($is_all_namespace) {
+            $uri = '/apis/apps/v1/daemonsets';
+        }
+
+        return $this->_list($uri, $query_parameters);
     }
 
     /**
@@ -81,8 +88,9 @@ class DaemonSet extends KubernetesClient implements KubernetesManagerIf
      */
     public function queryStatus(string $name)
     {
-        // TODO: Implement queryStatus() method.
-        return $this;
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/daemonsets/{$name}/status";
+
+        return $this->_queryStatus($uri);
     }
 
     /**
@@ -96,7 +104,8 @@ class DaemonSet extends KubernetesClient implements KubernetesManagerIf
      */
     public function repair(string $name, array $package = [])
     {
-        // TODO: Implement repair() method.
-        return $this;
+        $uri = "/apis/apps/v1/namespaces/{$this->namespace}/daemonsets/{$name}";
+
+        return $this->_repair($uri, self::TYPE_DAEMONSET, $package);
     }
 }

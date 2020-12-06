@@ -38,11 +38,10 @@ class Event extends KubernetesClient implements KubernetesManagerIf
 
     /**
      * @description查询event事件列表
-     * @function list
+     * @function   list
      *
-     * @param bool  $is_all_namespace
-     * @param array $query_parameters
-     *
+     * @param bool  $is_all_namespace 是否所有命名空间
+     * @param array $query_parameters 查询参数
      * @return $this
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = []): self

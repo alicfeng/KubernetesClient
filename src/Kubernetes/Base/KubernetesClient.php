@@ -119,8 +119,6 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @function    设置命名空间
      * @description 默认为 default
      *
-     * @param string $namespace
-     *
      * @return $this
      */
     public function setNamespace(string $namespace = 'default')
@@ -134,8 +132,6 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @function    设置版本号
      * @description 默认为 v1
      *
-     * @param string $api_version
-     *
      * @return $this
      */
     public function setApiVersion(string $api_version = 'v1')
@@ -148,8 +144,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    设置类型
      * @description 设置 package.kind 节点
-     *
-     * @param string $kind
      *
      * @return $this
      */
@@ -254,8 +248,6 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @function    接口请求结果响应
      * @description guzzle response
      *
-     * @return array
-     *
      * @throws CommunicationException
      */
     public function response(): array
@@ -307,8 +299,10 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    删除资源项
      * @description 删除指定资源项
-     * @param string $uri
-     * @param array  $query_parameters
+     *
+     * @param string $uri              路由地址
+     * @param array  $query_parameters 查询参数
+     *
      * @return $this
      */
     protected function _remove(string $uri, array $query_parameters = [])
@@ -325,8 +319,10 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    查询资源列表结合
      * @description 查询资源列表结合
-     * @param string $uri
-     * @param array  $query_parameters
+     *
+     * @param string $uri              路由地址
+     * @param array  $query_parameters 查询参数
+     *
      * @return $this
      */
     protected function _list(string $uri, array $query_parameters = [])
@@ -343,7 +339,9 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    查询资源状态
      * @description 查询具体资源状态
-     * @param string $uri
+     *
+     * @param string $uri 路由地址
+     *
      * @return $this
      */
     protected function _queryStatus(string $uri)
@@ -379,9 +377,8 @@ abstract class KubernetesClient extends AbstractKubernetes
      *
      * @param string $name 名称
      *
-     * @return bool
-     *
-     * @throws
+     * @throws CommunicationException
+     * @return  bool 布尔
      */
     public function exist(string $name): bool
     {
@@ -433,8 +430,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取 api 版本
      * @description 已请求获取响应值, 否则获取请求值
-     *
-     * @return string
      */
     public function getApiVersion(): string
     {
@@ -448,7 +443,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取类型
      * @description 已请求获取响应值, 否则获取请求值
-     * @return string
      */
     public function getKind(): string
     {
@@ -462,7 +456,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取元数据
      * @description 已请求获取响应值, 否则获取请求值
-     * @return array
      */
     public function getMetadata(): array
     {
@@ -476,7 +469,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     * @return array
      * @throws
      */
     public function getSpec(): array
@@ -491,7 +483,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     * @return array
      * @throws
      */
     public function getData(): array
@@ -506,7 +497,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     * @return array
      * @throws
      */
     public function getStatus(): array
@@ -521,7 +511,6 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    获取资源清单数据
      * @description 已请求获取响应值, 否则获取请求值
-     * @return array
      * @throws
      */
     public function getItems(): array

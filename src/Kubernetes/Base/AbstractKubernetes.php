@@ -22,6 +22,7 @@ abstract class AbstractKubernetes extends Client
     const TYPE_INGRESS                 = 'Ingress';
     const TYPE_SECRET                  = 'Secret';
     const TYPE_NODE                    = 'Node';
+    const TYPE_DAEMONSET               = 'DaemonSet';
 
     /*resource type about apiVersion and kind*/
     public static $resourceTypes = [
@@ -60,6 +61,10 @@ abstract class AbstractKubernetes extends Client
         self::TYPE_NODE                    => [
             'api_version' => 'v1',
             'kind'        => self::TYPE_NODE,
+        ],
+        self::TYPE_DAEMONSET => [
+            'api_version' => 'apps/v1',
+            'kind'        => self::TYPE_DAEMONSET,
         ],
     ];
 }
