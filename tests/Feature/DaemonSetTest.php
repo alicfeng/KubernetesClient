@@ -40,7 +40,7 @@ class DaemonSetTest extends TestCase
                             ],
                         ],
                     ],
-                ],])->create();
+                ], ])->create();
 
         $this->assertKubernetesResponse($response);
     }

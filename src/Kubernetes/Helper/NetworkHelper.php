@@ -16,7 +16,6 @@ class NetworkHelper
      * @param string $data 需要解码的字符串数据
      * @author      AlicFeng
      * @datatime    20-7-23 下午5:28
-     * @return string
      */
     public static function chunkedDecode($data): string
     {

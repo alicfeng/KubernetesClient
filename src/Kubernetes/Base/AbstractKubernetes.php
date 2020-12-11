@@ -62,7 +62,7 @@ abstract class AbstractKubernetes extends Client
             'api_version' => 'v1',
             'kind'        => self::TYPE_NODE,
         ],
-        self::TYPE_DAEMONSET => [
+        self::TYPE_DAEMONSET               => [
             'api_version' => 'apps/v1',
             'kind'        => self::TYPE_DAEMONSET,
         ],

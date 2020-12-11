@@ -9,9 +9,9 @@
 namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
-use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
-class ReplicationController extends KubernetesClient implements KubernetesManagerIf
+class ReplicationController extends KubernetesClient implements KubernetesManagerInterface
 {
     /**
      * @function    新建资源项

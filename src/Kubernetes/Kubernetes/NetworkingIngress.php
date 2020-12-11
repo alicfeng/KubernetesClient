@@ -11,8 +11,15 @@ namespace AlicFeng\Kubernetes\Kubernetes;
 use AlicFeng\Kubernetes\Base\KubernetesClient;
 use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
-class StatefulSet extends KubernetesClient implements KubernetesManagerInterface
+class NetworkingIngress extends KubernetesClient implements KubernetesManagerInterface
 {
+    public static $resourceTypes = [
+        self::TYPE_INGRESS => [
+            'api_version' => 'networking.k8s.io/v1beta1',
+            'kind'        => self::TYPE_INGRESS,
+        ],
+    ];
+
     /**
      * @function    新建资源项
      * @description 新建资源项
@@ -23,8 +30,9 @@ class StatefulSet extends KubernetesClient implements KubernetesManagerInterface
      */
     public function create(array $package = [])
     {
-        // TODO: Implement create() method.
-        return $this;
+        $uri = "/apis/networking.k8s.io/v1beta1/namespaces/{$this->namespace}/ingresses";
+
+        return $this->_create($uri, self::TYPE_INGRESS, $package);
     }
 
     /**
@@ -38,21 +46,23 @@ class StatefulSet extends KubernetesClient implements KubernetesManagerInterface
      */
     public function apply(string $name, array $package = [])
     {
-        // TODO: Implement apply() method.
         return $this;
     }
 
     /**
      * @function    删除资源项
      * @description 删除指定资源项
+     *
      * @param string $name             资源名称
      * @param array  $query_parameters 可选参数
+     *
      * @return $this
      */
     public function remove(string $name, array $query_parameters = [])
     {
-        // TODO: Implement remove() method.
-        return $this;
+        $uri = "/apis/networking.k8s.io/v1beta1/namespaces/{$this->namespace}/ingresses/{$name}";
+
+        return $this->_remove($uri, $query_parameters);
     }
 
     /**
@@ -60,14 +70,18 @@ class StatefulSet extends KubernetesClient implements KubernetesManagerInterface
      * @description 默认为具体的默认命名空间
      *
      * @param bool  $is_all_namespace 是否为所有命名空间
-     * @param array $query_parameters 查询参数
+     * @param array $query_parameters 列表查询参数
      *
      * @return $this
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
-        // TODO: Implement list() method.
-        return $this;
+        $uri = "/apis/networking.k8s.io/v1beta1/namespaces/{$this->namespace}/ingresses";
+        if ($is_all_namespace) {
+            $uri = '/apis/networking.k8s.io/v1beta1/ingresses';
+        }
+
+        return $this->_list($uri, $query_parameters);
     }
 
     /**
@@ -80,22 +94,20 @@ class StatefulSet extends KubernetesClient implements KubernetesManagerInterface
      */
     public function queryStatus(string $name)
     {
-        // TODO: Implement queryStatus() method.
         return $this;
     }
 
     /**
-     * @function     修改部分资源项
-     * @description  修改部分资源项
+     * @function    修改部分资源项
+     * @description 修改部分资源项
      *
-     * @param string $name    资源名称
+     * @param string $name    资源项名称
      * @param array  $package 期待的资源配置
      *
      * @return $this
      */
-    public function repair(string $name, array $package = [])
+    public function repair(string $name, array $package)
     {
-        // TODO: Implement repair() method.
         return $this;
     }
 }

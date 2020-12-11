@@ -9,9 +9,9 @@
 namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
-use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
-class Job extends KubernetesClient implements KubernetesManagerIf
+class Job extends KubernetesClient implements KubernetesManagerInterface
 {
     public function __construct(array $config = [])
     {

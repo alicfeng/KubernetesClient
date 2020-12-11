@@ -9,13 +9,13 @@
 namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
-use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 use AlicFeng\Kubernetes\Exception\CommunicationException;
 
 /**
  * Class Deployment | 应用部署管理类.
  */
-class Deployment extends KubernetesClient implements KubernetesManagerIf
+class Deployment extends KubernetesClient implements KubernetesManagerInterface
 {
     public function __construct(array $config = [])
     {
@@ -104,8 +104,6 @@ class Deployment extends KubernetesClient implements KubernetesManagerIf
     /**
      * @function    查看应用部署节点数量
      * @description 查看节点数量
-     *
-     * @param string $name
      *
      * @return $this
      */

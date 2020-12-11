@@ -14,6 +14,7 @@ use AlicFeng\Kubernetes\Kubernetes\Deployment;
 use AlicFeng\Kubernetes\Kubernetes\Event;
 use AlicFeng\Kubernetes\Kubernetes\Ingress;
 use AlicFeng\Kubernetes\Kubernetes\Job;
+use AlicFeng\Kubernetes\Kubernetes\NetworkingIngress;
 use AlicFeng\Kubernetes\Kubernetes\Node;
 use AlicFeng\Kubernetes\Kubernetes\PersistentVolumeClaim;
 use AlicFeng\Kubernetes\Kubernetes\Pod;
@@ -38,6 +39,7 @@ use AlicFeng\Kubernetes\Kubernetes\StatefulSet;
  * @method static ReplicationController      replicationController(array $config)
  * @method static Secrets                    secrets(array $config)
  * @method static StatefulSet                statefulSet(array $config)
+ * @method static NetworkingIngress          networkingIngress(array $config)
  */
 class Kubernetes
 {

@@ -9,9 +9,9 @@
 namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
-use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
-class DaemonSet extends KubernetesClient implements KubernetesManagerIf
+class DaemonSet extends KubernetesClient implements KubernetesManagerInterface
 {
     /**
      * @function    新建资源项

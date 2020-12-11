@@ -9,9 +9,9 @@
 namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
-use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
-class Event extends KubernetesClient implements KubernetesManagerIf
+class Event extends KubernetesClient implements KubernetesManagerInterface
 {
     public function create(array $package = [])
     {

@@ -118,6 +118,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    设置命名空间
      * @description 默认为 default
+     * @param string $namespace 命名空间
      *
      * @return $this
      */
@@ -131,6 +132,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    设置版本号
      * @description 默认为 v1
+     * @param string $api_version API版本
      *
      * @return $this
      */
@@ -144,6 +146,7 @@ abstract class KubernetesClient extends AbstractKubernetes
     /**
      * @function    设置类型
      * @description 设置 package.kind 节点
+     * @param string $kind 资源类型
      *
      * @return $this
      */
@@ -377,8 +380,8 @@ abstract class KubernetesClient extends AbstractKubernetes
      *
      * @param string $name 名称
      *
-     * @throws CommunicationException
      * @return  bool 布尔
+     * @throws CommunicationException
      */
     public function exist(string $name): bool
     {

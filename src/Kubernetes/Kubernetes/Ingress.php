@@ -9,9 +9,9 @@
 namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
-use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
-class Ingress extends KubernetesClient implements KubernetesManagerIf
+class Ingress extends KubernetesClient implements KubernetesManagerInterface
 {
     /**
      * @function    新建资源项
@@ -40,6 +40,7 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
     public function apply(string $name, array $package = [])
     {
         // TODO: Implement apply() method.
+        return $this;
     }
 
     /**
@@ -67,7 +68,12 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
-        // TODO: Implement list() method.
+        $uri = "/apis/extensions/v1beta1/namespaces/{$this->namespace}/ingresses";
+        if ($is_all_namespace) {
+            $uri = '/apis/extensions/v1beta1/ingresses';
+        }
+
+        return $this->_list($uri, $query_parameters);
     }
 
     /**
@@ -80,7 +86,8 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
      */
     public function queryStatus(string $name)
     {
-        // TODO: Implement queryStatus() method.
+        // TODO: Implement apply() method.
+        return $this;
     }
 
     /**
@@ -94,6 +101,7 @@ class Ingress extends KubernetesClient implements KubernetesManagerIf
      */
     public function repair(string $name, array $package)
     {
-        // TODO: Implement repair() method.
+        // TODO: Implement apply() method.
+        return $this;
     }
 }

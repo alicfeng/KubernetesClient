@@ -8,7 +8,7 @@
 
 namespace AlicFeng\Kubernetes\Base;
 
-interface KubernetesManagerIf
+interface KubernetesManagerInterface
 {
     /**
      * @function    新建资源项
