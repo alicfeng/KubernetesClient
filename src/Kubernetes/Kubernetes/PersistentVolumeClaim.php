@@ -58,7 +58,12 @@ class PersistentVolumeClaim extends KubernetesClient implements KubernetesManage
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
-        return $this;
+        $uri = "/api/v1/namespaces/{$this->namespace}/persistentvolumeclaims";
+        if ($is_all_namespace) {
+            $uri = '/api/v1/persistentvolumeclaims';
+        }
+
+        return $this->_list($uri, $query_parameters);
     }
 
     /**
