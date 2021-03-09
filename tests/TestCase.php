@@ -12,7 +12,6 @@ use AlicFeng\Kubernetes\Base\KubernetesClient;
 use Orchestra\Testbench\Concerns\CreatesApplication;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
-//use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
