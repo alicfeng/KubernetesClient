@@ -54,14 +54,17 @@
 - [x] Secrets
 - [x] StatefulSet
 - [x] Event
-- [x] Pvc
 - [x] PersistentVolumeClaim
 - [x] Ingress
 - [x] ReplicationController
+- [ ] GagaWay
+- [ ] VirtualService
 
 
 
 ## ☛ Usage
+
+Authorization support including token,username & password as well as cert file
 
 ```php
 use AlicFeng\Kubernetes\Kubernetes;
@@ -97,10 +100,13 @@ $service->setApiVersion('v1')->setKind('Service')->create($yaml);
 
 # Patch Service
 $service->apply();
+
 # Delete Service
 $service->delete('service-name');
+
 # Service Exist
 $service->list()->exist('service-name');
+
 # Item Service
 $service->list()->item('service-name');
 ```
@@ -110,6 +116,7 @@ $service->list()->item('service-name');
 ## 💖 Thanks developer
 
 - [lljiuzheyang](https://github.com/lljiuzheyang) 
+
 - [lsrong](https://github.com/lsrong)
 
 

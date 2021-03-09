@@ -13,12 +13,22 @@ use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
 class NetworkingIngress extends KubernetesClient implements KubernetesManagerInterface
 {
-    public static $resourceTypes = [
-        self::TYPE_INGRESS => [
-            'api_version' => 'networking.k8s.io/v1beta1',
-            'kind'        => self::TYPE_INGRESS,
-        ],
-    ];
+    /**
+     * @function    resourceTypes
+     * @description resource type about apiVersion and kind
+     * @author      AlicFeng
+     * @datatime    21-3-8 上午10:46
+     * @return array
+     */
+    public static function getResourceTypes(): array
+    {
+        return [
+            self::TYPE_INGRESS => [
+                'api_version' => config('kubernetes.api_version.networking_ingress'),
+                'kind'        => self::TYPE_INGRESS,
+            ],
+        ];
+    }
 
     /**
      * @function    新建资源项

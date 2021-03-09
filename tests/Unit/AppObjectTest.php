@@ -57,7 +57,7 @@ class AppObjectTest extends TestCase
 
     public function testObjectVar()
     {
-        foreach (AbstractKubernetes::$resourceTypes as $type => $value) {
+        foreach (AbstractKubernetes::resourceTypes() as $type => $value) {
             self::assertIsArray($value);
             self::assertEquals($type, $value['kind']);
             self::assertArrayHasKey('kind', $value);

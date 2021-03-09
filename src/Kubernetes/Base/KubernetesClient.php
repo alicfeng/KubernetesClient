@@ -31,19 +31,19 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @var string kubernetes api-server domain - k8s接口基本域
      */
     protected $base_uri = null;
-    /**
-     * @var string k8s token
-     */
-    protected $token = null;
-
-    /**
-     * @var string k8s username
-     */
-    protected $username = null;
-    /**
-     * @var string k8s password
-     */
-    protected $password = null;
+//    /**
+//     * @var string k8s token
+//     */
+//    protected $token = null;
+//
+//    /**
+//     * @var string k8s username
+//     */
+//    protected $username = null;
+//    /**
+//     * @var string k8s password
+//     */
+//    protected $password = null;
 
     /**
      * 请求报文.
@@ -93,9 +93,6 @@ abstract class KubernetesClient extends AbstractKubernetes
 
     public function __construct(array $config = [])
     {
-        $this->token     = $config['token']    ?? null;
-        $this->username  = $config['username'] ?? null;
-        $this->password  = $config['password'] ?? null;
         $this->base_uri  = $config['base_uri'];
         $this->namespace = $config['namespace'] ?? 'default';
 
@@ -103,13 +100,20 @@ abstract class KubernetesClient extends AbstractKubernetes
         $default['base_uri']                = $this->base_uri;
         $default['verify']                  = false;
         $default['headers']['Content-Type'] = 'application/json';
+
         // auth using token
-        if ($this->token) {
-            $default['headers']['Authorization'] = 'Bearer ' . $this->token;
+        if (null !== ($config['token'] ?? null)) {
+            $default['headers']['Authorization'] = 'Bearer ' . $config['token'];
         }
+
         // auth using username as well as password
-        if ($this->username) {
-            $default['auth'] = [$this->username, $this->password];
+        if (null !== ($config['username'] ?? null) && null !== ($config['password'] ?? null)) {
+            $default['auth'] = [$config['username'], $config['password']];
+        }
+
+        // auth using cert file
+        if (null !== ($config['cert'] ?? null)) {
+            $default['verify'] = $config['cert'];
         }
 
         parent::__construct($default);
@@ -535,10 +539,10 @@ abstract class KubernetesClient extends AbstractKubernetes
     protected function commonPackage(string $type, array $package = [])
     {
         if (null == $this->api_version) {
-            $this->api_version = self::$resourceTypes[$type]['api_version'];
+            $this->api_version = self::resourceTypes()[$type]['api_version'];
         }
         if (null == $this->kind) {
-            $this->kind = self::$resourceTypes[$type]['kind'];
+            $this->kind = self::resourceTypes()[$type]['kind'];
         }
 
         if (empty($package)) {

@@ -41,6 +41,7 @@
   "require-dev": {
     "phpunit/phpunit": "@stable",
     "composer/composer": "^1.8",
+    "laravel/framework": "5.8.*",
     "orchestra/testbench": "^3.5"
   },
   "minimum-stability": "stable",

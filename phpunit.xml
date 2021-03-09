@@ -26,5 +26,16 @@
         <env name="username" value="admin"/>
         <env name="password" value="admin"/>
         <env name="namespace" value="testing"/>
+        <env name="api_version_pod" value="v1"/>
+        <env name="api_version_deployment" value="apps/v1"/>
+        <env name="api_version_service" value="v1"/>
+        <env name="api_version_job" value="batch/v1"/>
+        <env name="api_version_config_map" value="v1"/>
+        <env name="api_version_persistent_volume_claim" value="v1"/>
+        <env name="api_version_ingress" value="extensions/v1beta1"/>
+        <env name="api_version_networking_ingress" value="networking.k8s.io/v1beta1"/>
+        <env name="api_version_secret" value="v1"/>
+        <env name="api_version_node" value="v1"/>
+        <env name="api_version_daemon_set" value="apps/v1"/>
     </php>
 </phpunit>
