@@ -26,10 +26,12 @@ class TestCase extends BaseTestCase
     protected static function getKubernetesConfig(): array
     {
         return [
-            'base_uri' => env('host') . ':' . env('port'),
-            'username' => env('username'),
-            'password' => env('password'),
-            'token'    => env('token'),
+            'base_uri'  => env('host') . ':' . env('port'),
+//            'username'  => env('username'),
+//            'password'  => env('password'),
+//            'token'     => env('token'),
+            'cert_path' => env('cert_path'),
+            'cert_storage_dir' => env('cert_storage_dir'),
         ];
     }
 
@@ -78,6 +80,7 @@ class TestCase extends BaseTestCase
             'secret'                  => env('api_version_secret'),
             'node'                    => env('api_version_node'),
             'daemon_set'              => env('api_version_daemon_set'),
+            'virtual_service'         => env('api_version_virtual_service'),
         ]]);
     }
 

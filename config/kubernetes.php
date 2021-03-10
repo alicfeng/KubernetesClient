@@ -24,12 +24,17 @@ return [
     /*
      * kubernetes api-server authorization certificate file path
      */
-    'cert'        => env('KUBERNETES_CERT'),
+    'cert_path'        => env('KUBERNETES_CERT_PATH'),
 
     /*
      * kubernetes default namespace
      */
     'namespace'   => env('KUBERNETES_NAMESPACE'),
+
+    /*
+     * kubernetes communication timeout
+     */
+    'timeout'     => env('KUBERNETES_TIMEOUT', 2),
 
     /*
      * kubernetes yaml.apiVersion for all resource types

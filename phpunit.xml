@@ -37,5 +37,6 @@
         <env name="api_version_secret" value="v1"/>
         <env name="api_version_node" value="v1"/>
         <env name="api_version_daemon_set" value="apps/v1"/>
+        <env name="api_version_virtual_service" value="networking.istio.io/v1alpha31"/>
     </php>
 </phpunit>

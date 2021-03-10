@@ -50,7 +50,8 @@
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-gd": "*",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "symfony/yaml": "^5.2"
   },
   "scripts": {
     "php-cs": [

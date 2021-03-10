@@ -10,6 +10,7 @@ namespace AlicFeng\Kubernetes\Base;
 
 use AlicFeng\Kubernetes\Enum\PatchCode;
 use AlicFeng\Kubernetes\Exception\CommunicationException;
+use AlicFeng\Kubernetes\Helper\CertHelper;
 use AlicFeng\Kubernetes\Helper\NetworkHelper;
 use Closure;
 use Illuminate\Support\Collection;
@@ -31,19 +32,6 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @var string kubernetes api-server domain - k8s接口基本域
      */
     protected $base_uri = null;
-//    /**
-//     * @var string k8s token
-//     */
-//    protected $token = null;
-//
-//    /**
-//     * @var string k8s username
-//     */
-//    protected $username = null;
-//    /**
-//     * @var string k8s password
-//     */
-//    protected $password = null;
 
     /**
      * 请求报文.
@@ -99,6 +87,7 @@ abstract class KubernetesClient extends AbstractKubernetes
         // k8s client configuration
         $default['base_uri']                = $this->base_uri;
         $default['verify']                  = false;
+        $default['timeout']                 = $config['timeout'] ?? 0;
         $default['headers']['Content-Type'] = 'application/json';
 
         // auth using token
@@ -112,8 +101,13 @@ abstract class KubernetesClient extends AbstractKubernetes
         }
 
         // auth using cert file
-        if (null !== ($config['cert'] ?? null)) {
-            $default['verify'] = $config['cert'];
+        if (null !== ($config['cert_path'] ?? null)) {
+
+            $cert                = CertHelper::transform($config['cert_path'], $config['cert_storage_dir'], $type);
+            $default['verify']   = $cert['ca'];
+            $default['ssl_key']  = $cert['client_key'];
+            $default['cert']     = $cert['client_cert'];
+            $default['base_uri'] = $cert['base_uri'];
         }
 
         parent::__construct($default);
