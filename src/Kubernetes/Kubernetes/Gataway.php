@@ -9,9 +9,9 @@
 namespace AlicFeng\Kubernetes\Kubernetes;
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
-use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
+use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 
-class Gataway extends KubernetesClient implements KubernetesManagerIf
+class Gataway extends KubernetesClient implements KubernetesManagerInterface
 {
     /**
      * {@inheritdoc}

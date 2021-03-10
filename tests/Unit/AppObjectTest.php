@@ -14,6 +14,7 @@ use AlicFeng\Kubernetes\Kubernetes\ConfigMap;
 use AlicFeng\Kubernetes\Kubernetes\DaemonSet;
 use AlicFeng\Kubernetes\Kubernetes\Deployment;
 use AlicFeng\Kubernetes\Kubernetes\Event;
+use AlicFeng\Kubernetes\Kubernetes\Gataway;
 use AlicFeng\Kubernetes\Kubernetes\Ingress;
 use AlicFeng\Kubernetes\Kubernetes\Job;
 use AlicFeng\Kubernetes\Kubernetes\Node;
@@ -23,6 +24,7 @@ use AlicFeng\Kubernetes\Kubernetes\ReplicationController;
 use AlicFeng\Kubernetes\Kubernetes\Secrets;
 use AlicFeng\Kubernetes\Kubernetes\Service;
 use AlicFeng\Kubernetes\Kubernetes\StatefulSet;
+use AlicFeng\Kubernetes\Kubernetes\VirtualService;
 use Tests\TestCase;
 
 class AppObjectTest extends TestCase
@@ -41,6 +43,8 @@ class AppObjectTest extends TestCase
         'secrets'               => Secrets::class,
         'service'               => Service::class,
         'statefulSet'           => StatefulSet::class,
+        'virtualService'        => VirtualService::class,
+        'gataway'               => Gataway::class,
     ];
 
     // 测试资源对象生成
@@ -57,7 +61,7 @@ class AppObjectTest extends TestCase
 
     public function testObjectVar()
     {
-        foreach (AbstractKubernetes::resourceTypes() as $type => $value) {
+        foreach ((new K8s())->resourceTypes() as $type => $value) {
             self::assertIsArray($value);
             self::assertEquals($type, $value['kind']);
             self::assertArrayHasKey('kind', $value);
@@ -66,4 +70,8 @@ class AppObjectTest extends TestCase
             $this->assertIsString($value['api_version']);
         }
     }
+}
+
+class K8s extends AbstractKubernetes
+{
 }

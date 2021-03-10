@@ -2,6 +2,11 @@
 
 return [
     /*
+     * kubernetes component runtime model for debug
+     */
+    'debug'=>env('KUBERNETES_DEBUG',false),
+
+    /*
      * kubernetes api-server host
      */
     'base_uri'    => env('KUBERNETES_BASE_URI'),
@@ -14,7 +19,7 @@ return [
     /*
      * kubernetes api-server authorization certificate storage dir
      */
-    'cert_storage_dir'        => env('KUBERNETES_CERT_STORAGE_DIR'),
+    'cert_storage_dir'        => env('KUBERNETES_CERT_STORAGE_DIR','/var/www/.kubernetes'),
 
     /*
      * kubernetes default namespace

@@ -62,7 +62,7 @@ class Kubernetes
         $namespace   = ucfirst($name);
         $application = "\\AlicFeng\\Kubernetes\\Kubernetes\\{$namespace}";
 
-        return new $application($config);
+        return new $application($config, 'k8s');
     }
 
     /**

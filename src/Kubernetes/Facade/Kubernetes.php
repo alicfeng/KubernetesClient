@@ -24,6 +24,7 @@ use AlicFeng\Kubernetes\Kubernetes\ReplicationController;
 use AlicFeng\Kubernetes\Kubernetes\Secrets;
 use AlicFeng\Kubernetes\Kubernetes\Service;
 use AlicFeng\Kubernetes\Kubernetes\StatefulSet;
+use AlicFeng\Kubernetes\Kubernetes\VirtualService;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -44,6 +45,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static StatefulSet                statefulSet()
  * @method static NetworkingIngress          networkingIngress()
  * @method static Gataway                    gataway()
+ * @method static VirtualService             virtualService()
  */
 class Kubernetes extends Facade
 {

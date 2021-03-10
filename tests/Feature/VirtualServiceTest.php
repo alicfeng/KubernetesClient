@@ -17,7 +17,7 @@ class VirtualServiceTest extends TestCase
 
     public function testCreate(): void
     {
-        $response = Asm::virtualService(self::getKubernetesConfig())
+        $response = Asm::virtualService(self::getAsmConfig())
             ->setNamespace('istio-system')
             ->setMetadata(
                 [
@@ -74,7 +74,7 @@ class VirtualServiceTest extends TestCase
 
     public function testListAllNamespace(): void
     {
-        $response = Asm::virtualService(self::getKubernetesConfig())
+        $response = Asm::virtualService(self::getAsmConfig())
             ->list(true);
 
         $this->assertKubernetesResponse($response);
@@ -82,7 +82,7 @@ class VirtualServiceTest extends TestCase
 
     public function testList(): void
     {
-        $response = Asm::virtualService(self::getKubernetesConfig())
+        $response = Asm::virtualService(self::getAsmConfig())
             ->list(false);
 
         $this->assertKubernetesResponse($response);
@@ -90,7 +90,7 @@ class VirtualServiceTest extends TestCase
 
     public function testDelete()
     {
-        $response = Asm::virtualService(self::getKubernetesConfig())
+        $response = Asm::virtualService(self::getAsmConfig())
             ->setNamespace('istio-system')
             ->remove(self::NAME);
 

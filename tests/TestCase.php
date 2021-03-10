@@ -25,12 +25,24 @@ class TestCase extends BaseTestCase
     protected static function getKubernetesConfig(): array
     {
         return [
-            'base_uri'  => env('host') . ':' . env('port'),
-            //            'username'  => env('username'),
-            //            'password'  => env('password'),
-            //            'token'     => env('token'),
+            'base_uri' => env('host') . ':' . env('port'),
+            'username' => env('username'),
+            'password' => env('password'),
+            'token'    => env('token'),
+        ];
+    }
+
+    /**
+     * @function    getAsmConfig
+     * @description 获取 asm 配置
+     * @author      AlicFeng
+     */
+    protected static function getAsmConfig(): array
+    {
+        return [
             'cert_path'        => env('cert_path'),
             'cert_storage_dir' => env('cert_storage_dir'),
+            'debug'            => true,
         ];
     }
 

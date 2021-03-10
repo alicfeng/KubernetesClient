@@ -9,6 +9,7 @@
 namespace AlicFeng\Kubernetes\Base;
 
 use AlicFeng\Kubernetes\Enum\PatchCode;
+use AlicFeng\Kubernetes\Exception\CertFileNotExistException;
 use AlicFeng\Kubernetes\Exception\CommunicationException;
 use AlicFeng\Kubernetes\Helper\CertHelper;
 use AlicFeng\Kubernetes\Helper\NetworkHelper;
@@ -32,6 +33,11 @@ abstract class KubernetesClient extends AbstractKubernetes
      * @var string kubernetes api-server domain - k8s接口基本域
      */
     protected $base_uri = null;
+
+    /**
+     * @var string kubernetes api-server token
+     */
+    protected $token = null;
 
     /**
      * 请求报文.
@@ -81,9 +87,10 @@ abstract class KubernetesClient extends AbstractKubernetes
 
     public function __construct(array $config = [], string $type = 'k8s')
     {
-        $this->base_uri     = $config['base_uri'];
+        $this->base_uri     = $config['base_uri']     ?? null;
         $this->namespace    = $config['namespace']    ?? 'default';
         $this->api_versions = $config['api_versions'] ?? [];
+        $this->token        = $config['token']        ?? null;
 
         // k8s client configuration
         $default['base_uri']                = $this->base_uri;
@@ -92,8 +99,8 @@ abstract class KubernetesClient extends AbstractKubernetes
         $default['headers']['Content-Type'] = 'application/json';
 
         // auth using token
-        if (null !== ($config['token'] ?? null)) {
-            $default['headers']['Authorization'] = 'Bearer ' . $config['token'];
+        if (null !== $this->token) {
+            $default['headers']['Authorization'] = 'Bearer ' . $this->token;
         }
 
         // auth using username as well as password
@@ -103,14 +110,33 @@ abstract class KubernetesClient extends AbstractKubernetes
 
         // auth using cert file
         if (null !== ($config['cert_path'] ?? null)) {
+            // 根据证书路径判断是否存在
+            $this->certWhetherExists($config['cert_path']);
+
             $cert                = CertHelper::decipher($config['cert_path'], $config['cert_storage_dir'], $type);
-            $default['verify']   = false; //$cert['ca'];
+            $default['verify']   = ($config['debug'] ?? false) ? false : $cert['ca'];
             $default['ssl_key']  = $cert['client_key'];
             $default['cert']     = $cert['client_cert'];
             $default['base_uri'] = $cert['base_uri'];
         }
 
         parent::__construct($default);
+    }
+
+    /**
+     * @function    certWhetherExists
+     * @description 判断证书是否存在
+     * @param  string                    $cert_path 证书路径
+     * @throws CertFileNotExistException
+     * @author      AlicFeng
+     */
+    private function certWhetherExists(string $cert_path): bool
+    {
+        if (false === file_exists($cert_path)) {
+            throw new CertFileNotExistException();
+        }
+
+        return true;
     }
 
     /**
