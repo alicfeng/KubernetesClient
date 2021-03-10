@@ -18,7 +18,6 @@ class NetworkingIngress extends KubernetesClient implements KubernetesManagerInt
      * @description resource type about apiVersion and kind
      * @author      AlicFeng
      * @datatime    21-3-8 上午10:46
-     * @return array
      */
     public static function getResourceTypes(): array
     {

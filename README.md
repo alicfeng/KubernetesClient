@@ -58,7 +58,7 @@
 - [x] Ingress
 - [x] ReplicationController
 - [ ] GagaWay
-- [ ] VirtualService
+- [x] VirtualService
 
 
 

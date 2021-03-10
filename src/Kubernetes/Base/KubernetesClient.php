@@ -103,8 +103,8 @@ abstract class KubernetesClient extends AbstractKubernetes
 
         // auth using cert file
         if (null !== ($config['cert_path'] ?? null)) {
-            $cert                = CertHelper::transform($config['cert_path'], $config['cert_storage_dir'], $type);
-            $default['verify']   = $cert['ca'];
+            $cert                = CertHelper::decipher($config['cert_path'], $config['cert_storage_dir'], $type);
+            $default['verify']   = false; //$cert['ca'];
             $default['ssl_key']  = $cert['client_key'];
             $default['cert']     = $cert['client_cert'];
             $default['base_uri'] = $cert['base_uri'];

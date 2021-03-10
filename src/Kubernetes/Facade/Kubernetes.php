@@ -13,6 +13,7 @@ use AlicFeng\Kubernetes\Kubernetes\ConfigMap;
 use AlicFeng\Kubernetes\Kubernetes\DaemonSet;
 use AlicFeng\Kubernetes\Kubernetes\Deployment;
 use AlicFeng\Kubernetes\Kubernetes\Event;
+use AlicFeng\Kubernetes\Kubernetes\Gataway;
 use AlicFeng\Kubernetes\Kubernetes\Ingress;
 use AlicFeng\Kubernetes\Kubernetes\Job;
 use AlicFeng\Kubernetes\Kubernetes\NetworkingIngress;
@@ -42,6 +43,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static Secrets                    secrets()
  * @method static StatefulSet                statefulSet()
  * @method static NetworkingIngress          networkingIngress()
+ * @method static Gataway                    gataway()
  */
 class Kubernetes extends Facade
 {

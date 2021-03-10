@@ -8,12 +8,14 @@
 
 namespace AlicFeng\Kubernetes;
 
+use AlicFeng\Kubernetes\Kubernetes\Gataway;
 use AlicFeng\Kubernetes\Kubernetes\VirtualService;
 
 /**
  * Class Kubernetes.
  *
  * @method static VirtualService             virtualService(array $config)
+ * @method static Gataway                    gateway(array $config)
  */
 class Asm
 {

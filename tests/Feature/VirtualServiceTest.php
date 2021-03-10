@@ -9,18 +9,90 @@
 namespace Tests\Feature;
 
 use AlicFeng\Kubernetes\Asm;
-use AlicFeng\Kubernetes\Helper\CertHelper;
 use Tests\TestCase;
 
 class VirtualServiceTest extends TestCase
 {
+    const NAME = 'testing-samego';
+
+    public function testCreate(): void
+    {
+        $response = Asm::virtualService(self::getKubernetesConfig())
+            ->setNamespace('istio-system')
+            ->setMetadata(
+                [
+                    'name' => self::NAME,
+                ]
+            )
+            ->setSpec(
+                [
+                    'hosts'    => [
+                        '*',
+                    ],
+                    'gateways' => [
+                        'istio-system/demo-gateway',
+                    ],
+                    'http'     => [
+                        [
+                            'match' => [
+                                [
+                                    'uri' => [
+                                        'prefix' => '/dataset',
+                                    ],
+                                ],
+                                [
+                                    'uri' => [
+                                        'exact' => '/demo',
+                                    ],
+                                ],
+                                [
+                                    'headers' => [
+                                        'X-Ca-Stage'         => [
+                                            'exact' => 'DEMO',
+                                        ],
+                                        'Platform-Module-Id' => [
+                                            'exact' => 'dataset',
+                                        ],
+                                    ],
+                                ],
+                            ],
+                            'route' => [
+                                [
+                                    'destination' => [
+                                        'host' => 'dataset-sample.application-test.svc.cluster.local',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ]
+            )
+            ->create();
+
+        $this->assertKubernetesResponse($response);
+    }
+
     public function testListAllNamespace(): void
     {
-        dd(CertHelper::transform('.config', env('cert_storage_dir'), 'asm'));
         $response = Asm::virtualService(self::getKubernetesConfig())
             ->list(true);
 
-        dd($response);
+        $this->assertKubernetesResponse($response);
+    }
+
+    public function testList(): void
+    {
+        $response = Asm::virtualService(self::getKubernetesConfig())
+            ->list(false);
+
+        $this->assertKubernetesResponse($response);
+    }
+
+    public function testDelete()
+    {
+        $response = Asm::virtualService(self::getKubernetesConfig())
+            ->setNamespace('istio-system')
+            ->remove(self::NAME);
 
         $this->assertKubernetesResponse($response);
     }

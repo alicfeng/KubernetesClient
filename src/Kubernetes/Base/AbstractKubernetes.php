@@ -34,7 +34,6 @@ abstract class AbstractKubernetes extends Client
     /**
      * @function    resourceTypes
      * @description resource type about apiVersion and kind
-     * @return array
      * @author      AlicFeng
      * @datatime    21-3-8 上午10:46
      */
