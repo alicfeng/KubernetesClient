@@ -12,7 +12,6 @@ use AlicFeng\Kubernetes\Base\KubernetesClient;
 use Orchestra\Testbench\Concerns\CreatesApplication;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
-
 class TestCase extends BaseTestCase
 {
     use CreatesApplication;
@@ -27,10 +26,10 @@ class TestCase extends BaseTestCase
     {
         return [
             'base_uri'  => env('host') . ':' . env('port'),
-//            'username'  => env('username'),
-//            'password'  => env('password'),
-//            'token'     => env('token'),
-            'cert_path' => env('cert_path'),
+            //            'username'  => env('username'),
+            //            'password'  => env('password'),
+            //            'token'     => env('token'),
+            'cert_path'        => env('cert_path'),
             'cert_storage_dir' => env('cert_storage_dir'),
         ];
     }

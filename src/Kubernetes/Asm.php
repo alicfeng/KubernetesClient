@@ -8,20 +8,6 @@
 
 namespace AlicFeng\Kubernetes;
 
-use AlicFeng\Kubernetes\Kubernetes\ConfigMap;
-use AlicFeng\Kubernetes\Kubernetes\DaemonSet;
-use AlicFeng\Kubernetes\Kubernetes\Deployment;
-use AlicFeng\Kubernetes\Kubernetes\Event;
-use AlicFeng\Kubernetes\Kubernetes\Ingress;
-use AlicFeng\Kubernetes\Kubernetes\Job;
-use AlicFeng\Kubernetes\Kubernetes\NetworkingIngress;
-use AlicFeng\Kubernetes\Kubernetes\Node;
-use AlicFeng\Kubernetes\Kubernetes\PersistentVolumeClaim;
-use AlicFeng\Kubernetes\Kubernetes\Pod;
-use AlicFeng\Kubernetes\Kubernetes\ReplicationController;
-use AlicFeng\Kubernetes\Kubernetes\Secrets;
-use AlicFeng\Kubernetes\Kubernetes\Service;
-use AlicFeng\Kubernetes\Kubernetes\StatefulSet;
 use AlicFeng\Kubernetes\Kubernetes\VirtualService;
 
 /**

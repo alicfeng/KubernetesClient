@@ -1,10 +1,12 @@
 <?php
-/**
- * Created by AlicFeng at 2021/3/9 下午9:47
+
+/*
+ * What samego team is that is 'one thing, a team, work together'
+ * Values comes from technology, technology comes from sharing~
+ * https://github.com/alicfeng/KubernetesClient
  */
 
 namespace AlicFeng\Kubernetes\Kubernetes;
-
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
 use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
@@ -12,7 +14,7 @@ use AlicFeng\Kubernetes\Base\KubernetesManagerInterface;
 class VirtualService extends KubernetesClient implements KubernetesManagerInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function create(array $package = [])
     {
@@ -20,7 +22,7 @@ class VirtualService extends KubernetesClient implements KubernetesManagerInterf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function apply(string $name, array $package = [])
     {
@@ -28,7 +30,7 @@ class VirtualService extends KubernetesClient implements KubernetesManagerInterf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function remove(string $name)
     {
@@ -36,7 +38,7 @@ class VirtualService extends KubernetesClient implements KubernetesManagerInterf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
@@ -49,7 +51,7 @@ class VirtualService extends KubernetesClient implements KubernetesManagerInterf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function queryStatus(string $name)
     {
@@ -57,7 +59,7 @@ class VirtualService extends KubernetesClient implements KubernetesManagerInterf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function repair(string $name, array $package)
     {

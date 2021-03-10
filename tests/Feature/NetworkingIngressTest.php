@@ -1,10 +1,12 @@
 <?php
-/**
- * Created by AlicFeng at 2020/12/11 下午11:41
+
+/*
+ * What samego team is that is 'one thing, a team, work together'
+ * Values comes from technology, technology comes from sharing~
+ * https://github.com/alicfeng/KubernetesClient
  */
 
 namespace Tests\Feature;
-
 
 use AlicFeng\Kubernetes\Kubernetes;
 use Tests\TestCase;
@@ -30,12 +32,12 @@ class NetworkingIngressTest extends TestCase
                                     'path'    => '/demo',
                                     'backend' => [
                                         'serviceName' => 'demo',
-                                        'servicePort' => 80
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                        'servicePort' => 80,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
             ])->create();
 

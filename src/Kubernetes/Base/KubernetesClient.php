@@ -79,10 +79,11 @@ abstract class KubernetesClient extends AbstractKubernetes
      */
     private $receive_count = 0;
 
-    public function __construct(array $config = [])
+    public function __construct(array $config = [], string $type = 'k8s')
     {
-        $this->base_uri  = $config['base_uri'];
-        $this->namespace = $config['namespace'] ?? 'default';
+        $this->base_uri     = $config['base_uri'];
+        $this->namespace    = $config['namespace']    ?? 'default';
+        $this->api_versions = $config['api_versions'] ?? [];
 
         // k8s client configuration
         $default['base_uri']                = $this->base_uri;
@@ -102,7 +103,6 @@ abstract class KubernetesClient extends AbstractKubernetes
 
         // auth using cert file
         if (null !== ($config['cert_path'] ?? null)) {
-
             $cert                = CertHelper::transform($config['cert_path'], $config['cert_storage_dir'], $type);
             $default['verify']   = $cert['ca'];
             $default['ssl_key']  = $cert['client_key'];
@@ -533,10 +533,10 @@ abstract class KubernetesClient extends AbstractKubernetes
     protected function commonPackage(string $type, array $package = [])
     {
         if (null == $this->api_version) {
-            $this->api_version = self::resourceTypes()[$type]['api_version'];
+            $this->api_version = $this->resourceTypes()[$type]['api_version'];
         }
         if (null == $this->kind) {
-            $this->kind = self::resourceTypes()[$type]['kind'];
+            $this->kind = $this->resourceTypes()[$type]['kind'];
         }
 
         if (empty($package)) {

@@ -23,56 +23,71 @@ abstract class AbstractKubernetes extends Client
     const TYPE_SECRET                  = 'Secret';
     const TYPE_NODE                    = 'Node';
     const TYPE_DAEMONSET               = 'DaemonSet';
+    const TYPE_VIRTUAL_SERVICE         = 'VirtualService';
+    const TYPE_GATEWAY                 = 'Gataway';
+
+    /**
+     * @var array kubernetes demo.api_version list
+     */
+    protected $api_versions = [];
 
     /**
      * @function    resourceTypes
      * @description resource type about apiVersion and kind
+     * @return array
      * @author      AlicFeng
      * @datatime    21-3-8 上午10:46
-     * @return array
      */
-    public static function resourceTypes(): array
+    public function resourceTypes(): array
     {
         return [
             self::TYPE_POD                     => [
-                'api_version' => config('kubernetes.api_version.pod'),
+                'api_version' => $this->api_versions['pod'] ?? 'v1',
                 'kind'        => self::TYPE_POD,
             ],
             self::TYPE_DEPLOYMENT              => [
-                'api_version' => config('kubernetes.api_version.deployment'),
+                'api_version' => $this->api_versions['pod'] ?? 'apps/v1',
                 'kind'        => self::TYPE_DEPLOYMENT,
             ],
             self::TYPE_SERVICE                 => [
-                'api_version' => config('kubernetes.api_version.service'),
+                'api_version' => $this->api_versions['pod'] ?? 'v1',
                 'kind'        => self::TYPE_SERVICE,
             ],
             self::TYPE_JOB                     => [
-                'api_version' => config('kubernetes.api_version.job'),
+                'api_version' => $this->api_versions['pod'] ?? 'batch/v1',
                 'kind'        => self::TYPE_JOB,
             ],
             self::TYPE_CONFIG_MAP              => [
-                'api_version' => config('kubernetes.api_version.config_map'),
+                'api_version' => $this->api_versions['pod'] ?? 'v1',
                 'kind'        => self::TYPE_CONFIG_MAP,
             ],
             self::TYPE_PERSISTENT_VOLUME_CLAIM => [
-                'api_version' => config('kubernetes.api_version.persistent_volume_claim'),
+                'api_version' => $this->api_versions['pod'] ?? 'v1',
                 'kind'        => self::TYPE_PERSISTENT_VOLUME_CLAIM,
             ],
             self::TYPE_INGRESS                 => [
-                'api_version' => config('kubernetes.api_version.ingress'),
+                'api_version' => $this->api_versions['pod'] ?? 'extensions/v1beta1',
                 'kind'        => self::TYPE_INGRESS,
             ],
             self::TYPE_SECRET                  => [
-                'api_version' => config('kubernetes.api_version.secret'),
+                'api_version' => $this->api_versions['pod'] ?? 'v1',
                 'kind'        => self::TYPE_SECRET,
             ],
             self::TYPE_NODE                    => [
-                'api_version' => config('kubernetes.api_version.node'),
+                'api_version' => $this->api_versions['pod'] ?? 'v1',
                 'kind'        => self::TYPE_NODE,
             ],
             self::TYPE_DAEMONSET               => [
-                'api_version' => config('kubernetes.api_version.daemon_set'),
+                'api_version' => $this->api_versions['pod'] ?? 'apps/v1',
                 'kind'        => self::TYPE_DAEMONSET,
+            ],
+            self::TYPE_VIRTUAL_SERVICE               => [
+                'api_version' => $this->api_versions['virtual_service'] ?? 'networking.istio.io/v1alpha3',
+                'kind'        => self::TYPE_VIRTUAL_SERVICE,
+            ],
+            self::TYPE_GATEWAY               => [
+                'api_version' => $this->api_versions['gataway'] ?? 'networking.istio.io/v1alpha3',
+                'kind'        => self::TYPE_GATEWAY,
             ],
         ];
     }

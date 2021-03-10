@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by AlicFeng at 2021/3/10 上午1:16
+
+/*
+ * What samego team is that is 'one thing, a team, work together'
+ * Values comes from technology, technology comes from sharing~
+ * https://github.com/alicfeng/KubernetesClient
  */
 
 namespace AlicFeng\Kubernetes\ServiceProvider;
 
-
 use AlicFeng\Kubernetes\Asm;
 use AlicFeng\Kubernetes\Contract\AsmInterface;
-use AlicFeng\Kubernetes\Contract\KubernetesInterface;
-use AlicFeng\Kubernetes\Kubernetes;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 class AsmServiceProvider extends LaravelServiceProvider
@@ -46,4 +46,3 @@ class AsmServiceProvider extends LaravelServiceProvider
         );
     }
 }
-

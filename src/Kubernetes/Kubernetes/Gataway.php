@@ -1,10 +1,12 @@
 <?php
-/**
- * Created by AlicFeng at 2021/3/9 下午9:46
+
+/*
+ * What samego team is that is 'one thing, a team, work together'
+ * Values comes from technology, technology comes from sharing~
+ * https://github.com/alicfeng/KubernetesClient
  */
 
 namespace AlicFeng\Kubernetes\Kubernetes;
-
 
 use AlicFeng\Kubernetes\Base\KubernetesClient;
 use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
@@ -12,7 +14,7 @@ use AlicFeng\Kubernetes\Base\KubernetesManagerIf;
 class Gataway extends KubernetesClient implements KubernetesManagerIf
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function create(array $package = [])
     {
@@ -20,7 +22,7 @@ class Gataway extends KubernetesClient implements KubernetesManagerIf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function apply(string $name, array $package = [])
     {
@@ -28,7 +30,7 @@ class Gataway extends KubernetesClient implements KubernetesManagerIf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function remove(string $name)
     {
@@ -36,15 +38,14 @@ class Gataway extends KubernetesClient implements KubernetesManagerIf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function list(bool $is_all_namespace = false, array $query_parameters = [])
     {
-
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function queryStatus(string $name)
     {
@@ -52,7 +53,7 @@ class Gataway extends KubernetesClient implements KubernetesManagerIf
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function repair(string $name, array $package)
     {
