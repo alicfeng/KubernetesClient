@@ -35,7 +35,8 @@ composer require alicfeng/kubernetes-client -vvv
 - **`Laravel`**
 
 ```shell
-php artisan vendor:publish --provider="AlicFeng\Kubernetes\ServiceProvider"
+php artisan vendor:publish --provider="AlicFeng\Kubernetes\ServiceProvider\AsmServiceProvider"
+php artisan vendor:publish --provider="AlicFeng\Kubernetes\ServiceProvider\KubernetesServiceProvider"
 # OR
 php artisan vendor:publish --tag=kubernetes
 php artisan vendor:publish --tag=asm
@@ -46,26 +47,40 @@ php artisan vendor:publish --tag=asm
 ## ✨ Features
 
 - [x] Service
+
 - [x] Deployment
+
 - [x] Pod
+
 - [x] Job
+
 - [x] ConfigMap
+
 - [x] DaemonSet
+
 - [x] Node
+
 - [x] Secrets
+
 - [x] StatefulSet
+
 - [x] Event
+
 - [x] PersistentVolumeClaim
+
 - [x] Ingress
+
 - [x] ReplicationController
+
 - [ ] GagaWay
+
 - [x] VirtualService
 
 
 
 ## ☛ Usage
 
-Authorization support including token,username & password as well as cert file
+Authorization support three method including token,username & password as well as cert file
 
 ```php
 use AlicFeng\Kubernetes\Kubernetes;
