@@ -4,8 +4,9 @@
   "type": "library",
   "license": "MIT",
   "keywords": [
-    "Kubernetes",
+    "kubernetes",
     "k8s",
+    "asm",
     "php",
     "alicfeng",
     "samego"
@@ -41,6 +42,7 @@
   "require-dev": {
     "phpunit/phpunit": "@stable",
     "composer/composer": "^1.8",
+    "friendsofphp/php-cs-fixer": "^2.18",
     "orchestra/testbench": "^3.5"
   },
   "minimum-stability": "stable",
@@ -55,8 +57,8 @@
   },
   "scripts": {
     "php-cs": [
-      "php-cs-fixer fix src",
-      "php-cs-fixer fix tests"
+      "./vendor/bin/php-cs-fixer fix src",
+      "./vendor/bin/php-cs-fixer fix tests"
     ]
   },
   "prefer-stable": true,

@@ -26,8 +26,8 @@ class TestCase extends BaseTestCase
     {
         return [
             'base_uri' => env('host') . ':' . env('port'),
-            'username' => env('username'),
-            'password' => env('password'),
+            //            'username' => env('username'),
+            //            'password' => env('password'),
             'token'    => env('token'),
         ];
     }
